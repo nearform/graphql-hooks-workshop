@@ -6,7 +6,7 @@
 - Back story
 - Ask if anyone has used Apollo / Relay
 
-## Part 1 - hello world (graphql/fastify/react)
+## [Part 1 - hello world (graphql/fastify/react)](https://github.com/nearform/graphql-hooks-workshop/tree/master/part-1-hello-world)
 
 - Set up a GraphQL server (clone repo, go to folder 1, part-1-hello-world)
 - `npm install`
@@ -16,13 +16,13 @@
 - install graphiQL - to view data (separate viewing)
 - Visit graphQL endpoint and demonstrate
 
-## Part 2 - graphQL schema for connecting with `graphql-hooks`
+## [Part 2 - graphQL schema for connecting with `graphql-hooks`](https://github.com/nearform/graphql-hooks-workshop/tree/master/part-2-schema)
 
 - Describe what we’re trying to build
 - List of ‘post’ and a form that creates a new one
 - create dummy data ?
 
-## Part 3 - graphQL-hooks
+## [Part 3 - graphQL-hooks](https://github.com/nearform/graphql-hooks-workshop/tree/master/part-3-hooks)
 
 - Describe what GraphQL-hooks does
 - npm i graphql-hooks
@@ -34,7 +34,7 @@
 - useMutation for the form -> move to a later step...
 - Verify that both work / fix people issues
 
-## Part 4 - graphQL-hooks-memcache
+## [Part 4 - graphQL-hooks-memcache](https://github.com/nearform/graphql-hooks-workshop/tree/master/part-4-caching)
 
 - Caching
 - `npm i graphql-hooks-memcache`
@@ -43,7 +43,7 @@
 - Store it in a simple k/v store
 - Demonstrate the caching works
 
-## Part 5 - graphQL-hooks-ssr
+## [Part 5 - graphQL-hooks-ssr](https://github.com/nearform/graphql-hooks-workshop/tree/master/part-5-ssr)
 
 - SSR
 - Npm i graphql-hooks-ssr
@@ -55,7 +55,7 @@
 - Update the code & demonstrate it works
 
 
-## Part 6 - graphQL pagination
+## [Part 6 - graphQL pagination](https://github.com/nearform/graphql-hooks-workshop/tree/master/part-6-pagination)
 
 - Pagination
 - 2 types, page based or infinite scrolling
