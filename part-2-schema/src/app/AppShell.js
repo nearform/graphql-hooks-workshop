@@ -1,21 +1,21 @@
 import React from 'react'
 import { Link, Router } from '@reach/router'
-import ListPosts from './pages/ListPosts'
-import NewPost from './pages/NewPost'
+import ListUsers from './pages/ListUsers'
+import NewUser from './pages/NewUser'
 
 class AppShell extends React.Component {
   render() {
     return (
       <div className="app-shell-component">
-        <h1>Posts</h1>
+        <h1>Users</h1>
         <nav>
           <ul>
-            <li><Link to='/'>Posts</Link></li>
-            <li><Link to='/new'>New Post</Link></li>
+            <li><Link to='/'>Users</Link></li>
+            <li><Link to='/new'>New User</Link></li>
           </ul>
           <Router>
-            <ListPosts path='/' />
-            <NewPost path='/new' />
+            <ListUsers path='/' />
+            <NewUser path='/new' />
           </Router>
         </nav>
       </div>

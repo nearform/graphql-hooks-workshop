@@ -1,12 +1,15 @@
 module.exports = `
-  type Post {
-    title: String
-    body: String
+  type User {
+    name: String
   }
+
   type Query {
-    posts: [Post]
+    users(skip: Int, limit: Int): [User]
+    firstUser: User
+    hello(name: String): String
   }
+
   type Mutation {
-    createPost(title: String!, body: String!): Post
+    createUser(name: String!): User
   }
 `
