@@ -1,10 +1,21 @@
 import React, { useState } from 'react'
+import { useMutation } from 'graphql-hooks'
 
-export default function NewUser ({ createUser, navigate }) {
+const CREATE_USER_MUTATION = `
+  mutation CreateUser($name: String!) {
+    createUser(name: $name) {
+      name
+    }
+  }
+`
+
+export default function NewUser ({ navigate }) {
   const [name, setName] = useState('')
 
+  const [createUser] = useMutation(CREATE_USER_MUTATION)
+
   const createNewUser = async () => {
-    await createUser({ name })
+    await createUser({ variables: { name } })
     navigate('../')
   }
 
