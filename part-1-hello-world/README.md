@@ -7,3 +7,8 @@
 - Fix any issues with people
 - install graphiQL - to view data (separate viewing)
 - Visit graphQL endpoint and demonstrate
+
+
+## GraphiQL
+
+http://127.0.0.1:3000/graphiql.html
