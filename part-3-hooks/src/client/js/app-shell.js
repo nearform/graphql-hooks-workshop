@@ -1,7 +1,10 @@
 import React from 'react'
-import { hydrate } from 'react-dom'
-import { GraphQLClient, ClientContext } from 'graphql-hooks'
+import { render } from 'react-dom'
+
 import AppShell from '../../app/AppShell'
+
+// graphql-hooks
+import { GraphQLClient, ClientContext } from 'graphql-hooks'
 
 const client = new GraphQLClient({
   url: '/graphql'
@@ -13,4 +16,4 @@ const App = (
   </ClientContext.Provider>
 )
 
-hydrate(App, document.getElementById('app-root'))
+render(App, document.getElementById('app-root'))

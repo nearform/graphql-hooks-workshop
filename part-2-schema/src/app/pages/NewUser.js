@@ -9,11 +9,10 @@ export default function NewUser ({ createUser, navigate }) {
   }
 
   return <>
-    <label>
-      Name
+    <br />
+    <label>Name:
       <input type='text' onChange={e => setName(e.target.value)} value={name} />
     </label>
-
     <button onClick={createNewUser}>Save</button>
   </>
 }

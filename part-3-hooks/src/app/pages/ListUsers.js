@@ -26,7 +26,7 @@ export default function ListUsers () {
 
   return (
     <ul>
-      {data.users.map((user, index) => <li key={index}>
+      {data.users.map((user, i) => <li key={i}>
         {user.name}
       </li>)}
     </ul>
