@@ -20,19 +20,6 @@ function renderHead() {
   `
 }
 
-async function renderScripts({ initialState }) {
-  const appShellBundlePath = await getBundlePath('app-shell.js')
-  return `
-    <script type="text/javascript">
-      window.__INITIAL_STATE__=${JSON.stringify(initialState).replace(
-        /</g,
-        '\\u003c'
-      )};
-    </script>
-    <script src="${appShellBundlePath}"></script>
-  `
-}
-
 async function appShellHandler(req, reply) {
   const head = renderHead()
 
@@ -65,6 +52,19 @@ async function appShellHandler(req, reply) {
     `
 
   reply.type('text/html').send(html)
+}
+
+async function renderScripts({ initialState }) {
+  const appShellBundlePath = await getBundlePath('app-shell.js')
+  return `
+    <script type="text/javascript">
+      window.__INITIAL_STATE__=${JSON.stringify(initialState).replace(
+        /</g,
+        '\\u003c'
+      )};
+    </script>
+    <script src="${appShellBundlePath}"></script>
+  `
 }
 
 module.exports = appShellHandler

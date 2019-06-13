@@ -1,6 +1,5 @@
 const React = require('react')
 const ReactDOMServer = require('react-dom/server')
-const { ServerLocation } = require('@reach/router')
 
 // graphql-hooks
 const { getInitialState } = require('graphql-hooks-ssr')
@@ -45,11 +44,9 @@ async function appShellHandler(req, reply) {
   })
 
   const App = (
-    <ServerLocation url={req.raw.url}>
       <ClientContext.Provider value={client}>
         <AppShell />
       </ClientContext.Provider>
-    </ServerLocation>
   )
 
   const initialState = await getInitialState({ App, client })

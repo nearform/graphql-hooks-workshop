@@ -1,18 +1,20 @@
 # Part 1 - hello world (graphql/fastify/react)
 
-- Set up a GraphQL server (clone repo, go to folder 1, part-1-hello-world)
+- Set up a GraphQL server
+  - clone repo
+  `git clone git@github.com:nearform/graphql-hooks-workshop.git`
+  - change directory to `part-1-hello-world`
 - `npm install`
 - `npm run watch`
-- view site in browser: [http://localhost:3000](localhost:3000)
-- Fix any issues with people
-- install graphiQL - to view data (separate viewing)
-- Visit graphQL endpoint and demonstrate
+- View site in browser: http://localhost:3000
+- Fix installation issues
+- View GraphiQL interface http://localhost:3000/graphiql.html
 
 ## Fill in
 
 - Install fastify-gql
 
-  ```npm install fastify-gql```
+  ```npm install fastify-gql --save```
 
 - Setup `fastify-gql` as a plugin for `fastify` server (`src/server/index.js`)
 
@@ -86,8 +88,3 @@
     }
   `
   ```
-
-
-## GraphiQL
-
-http://127.0.0.1:3000/graphiql.html

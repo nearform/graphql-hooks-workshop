@@ -19,7 +19,6 @@ module.exports = () => {
   app.register(graphqlPlugin)
 
   app.get('/', appShellHandler)
-  app.get('/users', appShellHandler)
 
   app.listen(3000)
 }

@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link, Router } from '@reach/router'
 
 class AppShell extends React.Component {
   render() {

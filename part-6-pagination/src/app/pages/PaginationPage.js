@@ -1,5 +1,4 @@
-import React from 'react'
-
+import React, { useState } from 'react'
 import { useQuery } from 'graphql-hooks'
 
 const USERS_QUERY = `
@@ -10,8 +9,10 @@ const USERS_QUERY = `
   }
 `
 
-function PaginationPage() {
-  const [page, setPage] = React.useState(1)
+export default function PaginationPage() {
+
+  const [page, setPage] = useState(1)
+
   const { data } = useQuery(USERS_QUERY, {
     variables: {
       limit: 1,
@@ -25,12 +26,12 @@ function PaginationPage() {
       <ul>
         {data &&
           data.users &&
-          data.users.map((user, i) => <li key={i}>{user.name}</li>)}
+          data.users.map((user, i) =>
+            <li key={i}>{user.name}</li>
+          )}
       </ul>
       <button onClick={() => setPage(page - 1)}>Prev</button>
       <button onClick={() => setPage(page + 1)}>Next</button>
     </div>
   )
 }
-
-export default PaginationPage

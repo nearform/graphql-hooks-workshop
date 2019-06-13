@@ -1,4 +1,3 @@
-
 // helpers
 const { getBundlePath } = require('../helpers/manifest')
 

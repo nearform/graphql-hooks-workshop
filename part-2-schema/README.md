@@ -1,64 +1,60 @@
-# Part 2 - graphQL schema for connecting with `graphql-hooks`
+# Part 2 - graphQL schema for `graphql-hooks`
 
-- Describe what we’re trying to build
-- List of ‘post’ and a form that creates a new one
-- create dummy data ?
+- Display a list of 'users'
+- Create a new 'user'
 
 ## Fill in
 
 - Create `src/app/pages/ListUsers.js`
 
   ```js
-  import React from 'react'
-
-  export default function ListUsers ({ users }) {
-    return (
-      <ul>
-        {users.map((user, i) => <li key={i}>
-          {user.name}
-        </li>)}
-      </ul>
-    )
-  }
-  ```
-
-- Create `src/app/pages/NewUser.js`
-  ```js
   import React, { useState } from 'react'
 
-  export default function NewUser ({ createUser, navigate }) {
+  export default function ListUsers ({ users, createUser }) {
+
     const [name, setName] = useState('')
 
-    const createNewUser = async () => {
+    async function createNewUser() {
+      console.log
       await createUser({ name })
-      navigate('../')
+      setName('')
     }
 
-    return <>
-      <br />
-      <label>Name:
-        <input type='text' onChange={e => setName(e.target.value)} value={name} />
-      </label>
-      <button onClick={createNewUser}>Save</button>
-    </>
+    return (
+      <div>
+        <ul>
+          {users.map((user, i) =>
+            <li key={i}>{user.name}</li>
+          )}
+        </ul>
+        <label>Name:
+          <input
+            type='text'
+            onChange={e => setName(e.target.value)}
+            value={name}
+          />
+        </label>
+        <button onClick={createNewUser}>Save</button>
+      </div>
+    )
   }
   ```
 
 - Modify `src/app/AppShell.js`
   ```js
+  import ListUsers from './pages/ListUsers'
+
   const USERS = [
     { name: 'John' },
     { name: 'Sally' }
   ]
 
+  <...>
+
   const createUser = user => USERS.push(user)
 
   <...>
-  <Router>
-    <ListUsers path='/' users={USERS} />
-    <NewUser path='/new' createUser={createUser} />
-    <NotFoundPage default />
-  </Router>
-  <...>
+  
+  <h1>Users List</h1>
+  <ListUsers path='/' users={USERS} createUser={createUser} />
   ```
-
