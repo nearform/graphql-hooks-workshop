@@ -9,7 +9,7 @@
   - Serialises the cache in the html payload to the app
   - Parses the JSON and passes it to memcache as its initial value
 - Update the code and fix issues
-- Open source code to demonstrate it works
+- View source code to demonstrate it works
 
 ## Fill in
 
