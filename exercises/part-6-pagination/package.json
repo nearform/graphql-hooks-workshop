@@ -1,0 +1,67 @@
+{
+  "name": "part-6-pagination",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:client": "webpack",
+    "build:server": "babel src -d lib --copy-files",
+    "prebuild": "rm -rf build lib",
+    "build": "npm run build:server && npm run build:client",
+    "start": "node ./lib/index.js",
+    "watch:client": "webpack --watch",
+    "watch:server": "nodemon --watch src --ignore src/client --exec \"npm run build:server && npm run start | pino-pretty\"",
+    "prewatch": "npm run prebuild",
+    "watch": "npm run build:client && npm run watch:server & npm run watch:client"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@reach/router": "1.2.1",
+    "babel-plugin-dynamic-import-node": "2.2.0",
+    "fastify": "1.14.6",
+    "fastify-gql": "0.9.0",
+    "fastify-static": "1.1.0",
+    "graphql-hooks": "^3.5.1",
+    "graphql-hooks-memcache": "^1.2.0",
+    "graphql-hooks-ssr": "^1.1.2",
+    "isomorphic-unfetch": "3.0.0",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+    "react-tree-walker": "4.3.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.4.4",
+    "@babel/core": "7.4.5",
+    "@babel/preset-env": "7.4.5",
+    "@babel/preset-react": "7.0.0",
+    "babel-loader": "8.0.6",
+    "nodemon": "1.19.1",
+    "pino-pretty": "3.1.0",
+    "webpack": "4.33.0",
+    "webpack-cli": "^3.3.3",
+    "webpack-manifest-plugin": "2.0.4",
+    "webpack-merge": "4.2.1"
+  },
+  "browserslist": "> 0.25%, not dead",
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ],
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-object-rest-spread",
+      "dynamic-import-node"
+    ]
+  }
+}
