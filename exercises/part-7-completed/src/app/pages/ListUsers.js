@@ -22,7 +22,6 @@ const GET_FIRST_USER_QUERY = `
     }
   }
 `
-
 export default function ListUsers () {
 
   const [name, setName] = React.useState('')

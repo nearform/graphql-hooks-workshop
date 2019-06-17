@@ -25,7 +25,7 @@ const GET_FIRST_USER_QUERY = `
 
 export default function ListUsers () {
 
-  const [name, setName] = React.useState('')
+  const [name, setName] = useState('')
 
   const { loading, data = { users: [] }, error, refetch: refetchUsers } = useQuery(LIST_USERS_QUERY)
 
@@ -51,7 +51,7 @@ export default function ListUsers () {
     </div>
   }
 
-  if (!loading && !error && data && data.users) {
+  if (!loading && !error && data.users) {
     return (
       <div>
         <div>
@@ -61,9 +61,9 @@ export default function ListUsers () {
         <div>First User: {firstUserData && firstUserData.firstUser.name}</div>
         <h2>Users List</h2>
         <ul>
-          {data.users.map((user, i) =>
-            <li key={i}>{user.name}</li>
-          )}
+          {data.users.map((user, i) => <li key={i}>
+            {user.name}
+          </li>)}
         </ul>
         <label>Name:
           <input

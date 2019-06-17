@@ -1,65 +1,31 @@
-# Part 3 - graphQL-hooks
+# Part 2 - graphQL schema for `graphql-hooks`
 
-- Describe what GraphQL-hooks does
-- `npm install graphql-hooks --save`
-- Update the front-end to use ClientProvider
-- import `useQuery` for the list
-- import `useMutation` for the form
-- Verify that both work and fix any issues
+- Display a list of 'users'
+- Create a new 'user'
 
 ## Fill in
-- Install `graphql-hooks`
-  `npm install graphql-hooks --save`
 
-- Modify `src/app/pages/ListUsers.js`
+- Create `src/app/pages/ListUsers.js`
 
   ```js
-  import { useQuery, useMutation } from 'graphql-hooks'
+  import React, { useState } from 'react'
 
-  const LIST_USERS_QUERY = `
-    query ListUsersQuery {
-      users {
-        name
-      }
+  export default function ListUsers ({ users, createUser }) {
+
+    const [name, setName] = useState('')
+
+    async function createNewUser() {
+      console.log
+      await createUser({ name })
+      setName('')
     }
-  `
-  const CREATE_USER_MUTATION = `
-    mutation CreateUser($name: String!) {
-      createUser(name: $name) {
-        name
-      }
-    }
-  `
 
-  const { loading, data = { users: [] }, error, refetch: refetchUsers } = useQuery(LIST_USERS_QUERY)
-
-  const [createUser] = useMutation(CREATE_USER_MUTATION)
-
-  async function createNewUser() {
-    await createUser({ variables: { name } })
-    setName('')
-    refetchUsers()
-  }
-
-  if (loading) {
-    return <div>
-      Loading...
-    </div>
-  }
-
-  if (error) {
-    return <div>
-      Error occured.
-    </div>
-  }
-
-  if (!loading && !error && data.users) {
     return (
       <div>
         <ul>
-          {data.users.map((user, i) => <li key={i}>
-            {user.name}
-          </li>)}
+          {users.map((user, i) =>
+            <li key={i}>{user.name}</li>
+          )}
         </ul>
         <label>Name:
           <input
@@ -71,29 +37,24 @@
         <button onClick={createNewUser}>Save</button>
       </div>
     )
+  }
   ```
-- Update title in `src/app/AppShell.js`
 
-    ```js
-
-    <h1>GraphQL Hooks</h1>
-
-    ```
-- Modify `src/client/js/app-shell.js`
-
+- Modify `src/app/AppShell.js`
   ```js
+  import ListUsers from './pages/ListUsers'
 
-    // graphql-hooks
-    import { GraphQLClient, ClientContext } from 'graphql-hooks'
+  const USERS = [
+    { name: 'John' },
+    { name: 'Sally' }
+  ]
 
-    const client = new GraphQLClient({
-      url: '/graphql'
-    })
+  <...>
 
-    const App = (
-      <ClientContext.Provider value={client}>
-        <AppShell />
-      </ClientContext.Provider>
-    )
+  const createUser = user => USERS.push(user)
 
+  <...>
+  
+  <h1>Users List</h1>
+  <ListUsers path='/' users={USERS} createUser={createUser} />
   ```

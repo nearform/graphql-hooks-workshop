@@ -1,5 +1,5 @@
 {
-  "name": "part-5-ssr",
+  "name": "part-4-caching",
   "version": "1.0.0",
   "private": true,
   "description": "",
@@ -27,8 +27,6 @@
     "fastify-static": "1.1.0",
     "graphql-hooks": "^3.5.1",
     "graphql-hooks-memcache": "^1.2.0",
-    "graphql-hooks-ssr": "^1.1.2",
-    "isomorphic-unfetch": "3.0.0",
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "react-tree-walker": "4.3.0"
