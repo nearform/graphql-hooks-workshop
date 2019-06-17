@@ -1,9 +1,9 @@
 # Part 2 - graphQL schema for `graphql-hooks`
 
-- Goal 1: Display a list of 'users'
-- Goal 2: Create a new 'user'
+- Display a list of 'users'
+- Create a new 'user'
 
-## Steps
+## Fill in
 
 - Create `src/app/pages/ListUsers.js`
 
@@ -54,7 +54,7 @@
   const createUser = user => USERS.push(user)
 
   <...>
-
+  
   <h1>Users List</h1>
   <ListUsers path='/' users={USERS} createUser={createUser} />
   ```
