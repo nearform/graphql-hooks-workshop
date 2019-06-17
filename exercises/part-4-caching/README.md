@@ -1,99 +1,102 @@
-# Part 3 - graphQL-hooks
+# Part 4 - graphQL-hooks Caching
 
-- Describe what GraphQL-hooks does
-- `npm install graphql-hooks --save`
-- Update the front-end to use ClientProvider
-- import `useQuery` for the list
-- import `useMutation` for the form
-- Verify that both work and fix any issues
+- `npm install graphql-hooks-memcache --save`
+- `npm install @reach/router --save`
+- Update the client provider
+- The caching implementation is document based
+- Create a hash of the operation and its options
+- Store it in a simple k/v store
+- Demonstrate the caching works by clicking on the Test Link
 
 ## Fill in
-- Install `graphql-hooks`
-  `npm install graphql-hooks --save`
+- Install graphql-hooks-memcache
+  `npm install graphql-hooks-memcache --save`
 
-- Modify `src/app/pages/ListUsers.js`
-
+- Modify `src/client/js/app-shell.js`
   ```js
-  import { useQuery, useMutation } from 'graphql-hooks'
+    import memCache from 'graphql-hooks-memcache'
 
-  const LIST_USERS_QUERY = `
-    query ListUsersQuery {
-      users {
-        name
-      }
-    }
-  `
-  const CREATE_USER_MUTATION = `
-    mutation CreateUser($name: String!) {
-      createUser(name: $name) {
-        name
-      }
-    }
-  `
-
-  const { loading, data = { users: [] }, error, refetch: refetchUsers } = useQuery(LIST_USERS_QUERY)
-
-  const [createUser] = useMutation(CREATE_USER_MUTATION)
-
-  async function createNewUser() {
-    await createUser({ variables: { name } })
-    setName('')
-    refetchUsers()
-  }
-
-  if (loading) {
-    return <div>
-      Loading...
-    </div>
-  }
-
-  if (error) {
-    return <div>
-      Error occured.
-    </div>
-  }
-
-  if (!loading && !error && data.users) {
-    return (
-      <div>
-        <ul>
-          {data.users.map((user, i) => <li key={i}>
-            {user.name}
-          </li>)}
-        </ul>
-        <label>Name:
-          <input
-            type='text'
-            onChange={e => setName(e.target.value)}
-            value={name}
-          />
-        </label>
-        <button onClick={createNewUser}>Save</button>
-      </div>
-    )
+    const initialState = window.__INITIAL_STATE__
+    const client = new GraphQLClient({
+      url: '/graphql',
+      cache: memCache({ initialState })
+    })
   ```
-- Update title in `src/app/AppShell.js`
-
+- Test Caching
+  - Install @reach/router for test navigation
+    `npm install @reach/router --save`
+  - Modify `src/app/pages/ListUser.js`
     ```js
+      import { useQuery, useMutation, useManualQuery } from 'graphql-hooks'
 
-    <h1>GraphQL Hooks</h1>
+      <...>
+
+      const GET_FIRST_USER_QUERY = `
+        query FirstUser {
+          firstUser {
+            name
+          }
+        }
+      `
+
+      <...>
+
+      const [getFirstUser, { data: firstUserData }] = useManualQuery(
+        GET_FIRST_USER_QUERY
+      )
+
+      <...>
+
+      <div>
+        <br />Trigger query, click 'Test Cache' and then 'Home' to test cache
+      </div>
+      <button onClick={getFirstUser}>Manually trigger Query</button>
+      <div>First User: {firstUserData && firstUserData.firstUser.name}</div>
 
     ```
-- Modify `src/client/js/app-shell.js`
+  - Create `src/app/pages/TestPage.js`
+    ```js
+      import React from 'react'
 
-  ```js
+      export default function TestPage() {
 
-    // graphql-hooks
-    import { GraphQLClient, ClientContext } from 'graphql-hooks'
+        return (
+          <div>
+            <br />Return Home to test if data is cached without querying
+          </div>
+        )
+      }
+    ```
+  - Create `src/app/pages/NotFoundPage.js`
+    ```js
+      import React from 'react'
 
-    const client = new GraphQLClient({
-      url: '/graphql'
-    })
+      function NotFoundPage() {
+        return <div>404 - Not Found</div>
+      }
 
-    const App = (
-      <ClientContext.Provider value={client}>
-        <AppShell />
-      </ClientContext.Provider>
-    )
+      export default NotFoundPage
 
-  ```
+    ```
+  - Modify `src/app/AppShell.js`
+    ```js
+      import { Link, Router } from '@reach/router'
+
+      // components
+      import NotFoundPage from './pages/NotFoundPage'
+      import ListUsers from './pages/ListUsers'
+      import TestPage from './pages/TestPage'
+
+      <...>
+
+      <nav>
+        <Link to="/">Home</Link>|
+        <Link to="/test">Test Cache</Link>
+      </nav>
+      <Router>
+        <ListUsers path='/' />
+        <TestPage path="/test" />
+        <NotFoundPage default />
+      </Router>
+
+    ```

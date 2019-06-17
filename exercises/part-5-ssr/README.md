@@ -1,102 +1,67 @@
-# Part 4 - graphQL-hooks Caching
+# Part 5 - graphQL-hooks-ssr
 
-- `npm install graphql-hooks-memcache --save`
-- `npm install @reach/router --save`
-- Update the client provider
-- The caching implementation is document based
-- Create a hash of the operation and its options
-- Store it in a simple k/v store
-- Demonstrate the caching works by clicking on the Test Link
+- SSR - Server Side Rendering
+- `npm install graphql-hooks-ssr --save`
+- Implementation
+  - Finds all the `useQuery`s and resolves them
+  - Re-renders and verifies all queries have been resolved
+  - Populates the cache with all of the queries
+  - Serialises the cache in the html payload to the app
+  - Parses the JSON and passes it to memcache as its initial value
+- Update the code and fix issues
+- Open source code to demonstrate it works
 
 ## Fill in
-- Install graphql-hooks-memcache
-  `npm install graphql-hooks-memcache --save`
 
-- Modify `src/client/js/app-shell.js`
+- Install `graphql-hooks-ssr`
+  - `npm install graphql-hooks-ssr --save`
+- Install `isomorphic-unfetch`
+  - `npm install isomorphic-unfetch --save`
+
+- Modify `src/server/handlers/app-shell.js`
   ```js
-    import memCache from 'graphql-hooks-memcache'
+  const { getInitialState } = require('graphql-hooks-ssr')
 
-    const initialState = window.__INITIAL_STATE__
-    const client = new GraphQLClient({
-      url: '/graphql',
-      cache: memCache({ initialState })
-    })
+  <...>
+
+  const client = new GraphQLClient({
+    url: 'http://127.0.0.1:3000/graphql',
+    cache: memCache(),
+    fetch: require('isomorphic-unfetch'),
+    logErrors: true
+  })
+
+  const App = (
+    <ClientContext.Provider value={client}>
+      <AppShell />
+    </ClientContext.Provider>
+  )
+
+  const initialState = await getInitialState({ App, client })
+  const content = ReactDOMServer.renderToString(App)
+  const scripts = await renderScripts({ initialState })
+
+  <...>
+
+  async function renderScripts({ initialState }) {
+    const appShellBundlePath = await getBundlePath('app-shell.js')
+    return `
+      <script type="text/javascript">
+        window.__INITIAL_STATE__=${JSON.stringify(initialState).replace(
+          /</g,
+          '\\u003c'
+        )};
+      </script>
+      <script src="${appShellBundlePath}"></script>
+    `
+  }
   ```
-- Test Caching
-  - Install @reach/router for test navigation
-    `npm install @reach/router --save`
-  - Modify `src/app/pages/ListUser.js`
-    ```js
-      import { useQuery, useMutation, useManualQuery } from 'graphql-hooks'
 
-      <...>
+- Modify `src/client/js/app-shell.js` (replace 'render' with 'hydrate')
+  ```js
+  import { hydrate } from 'react-dom'
 
-      const GET_FIRST_USER_QUERY = `
-        query FirstUser {
-          firstUser {
-            name
-          }
-        }
-      `
+  <...>
 
-      <...>
-
-      const [getFirstUser, { data: firstUserData }] = useManualQuery(
-        GET_FIRST_USER_QUERY
-      )
-
-      <...>
-
-      <div>
-        <br />Trigger query, click 'Test Cache' and then 'Home' to test cache
-      </div>
-      <button onClick={getFirstUser}>Manually trigger Query</button>
-      <div>First User: {firstUserData && firstUserData.firstUser.name}</div>
-
-    ```
-  - Create `src/app/pages/TestPage.js`
-    ```js
-      import React from 'react'
-
-      export default function TestPage() {
-
-        return (
-          <div>
-            <br />Return Home to test if data is cached without querying
-          </div>
-        )
-      }
-    ```
-  - Create `src/app/pages/NotFoundPage.js`
-    ```js
-      import React from 'react'
-
-      function NotFoundPage() {
-        return <div>404 - Not Found</div>
-      }
-
-      export default NotFoundPage
-
-    ```
-  - Modify `src/app/AppShell.js`
-    ```js
-      import { Link, Router } from '@reach/router'
-
-      // components
-      import NotFoundPage from './pages/NotFoundPage'
-      import ListUsers from './pages/ListUsers'
-      import TestPage from './pages/TestPage'
-
-      <...>
-
-      <nav>
-        <Link to="/">Home</Link>|
-        <Link to="/test">Test Cache</Link>
-      </nav>
-      <Router>
-        <ListUsers path='/' />
-        <TestPage path="/test" />
-        <NotFoundPage default />
-      </Router>
-
-    ```
+  hydrate(App, document.getElementById('app-root'))
+  ```
