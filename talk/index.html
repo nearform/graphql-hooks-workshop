@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
+  <title>Big</title>
+  <link href='big.css' rel='stylesheet' type='text/css' />
+  <link href='highlight.css' rel='stylesheet' type='text/css' />
+  <style>
+    .new-shiny { background: #aaaaaa; }
+
+    @-webkit-keyframes blinker {
+      from { opacity: 1.0; }
+      to { opacity: 0.5; }
+    }
+
+    .blink {
+      -webkit-animation-name: blinker;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-timing-function: cubic-bezier(1.0,0,0,1.0);
+      -webkit-animation-duration: 800ms;
+    }
+  </style>
+  <script src='big.js'></script>
+  <script src='highlight.js'></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body class='dark'>
+  <div class="title">
+    <div style="height: 30%">
+      graphql-<span class="bubblegum">hooks</span>
+      <em><i><span class="blink">Workshop</span></i></em>
+    </div>
+    <div style="font-size: 0.2em">
+      <span class="supersplit">@</span>mafintosh
+      <span class="supersplit">@</span>matteocollina
+    </div>
+  </div>
+  <div>
+    <img src='./nearform.svg' width='100'>
+  </div>
+  <div>
+    Graph<span class="bubblegum">QL</span> is a new language for interacting with <em>web servers</em>
+  </div>
+  <div>
+    Graph<span class="bubblegum">QL</span> is a new way to <em>interact with REST endpoints</em>
+  </div>
+  <div>
+    Graph<span class="bubblegum">QL</span> has a <em>rich ecosystem</em>
+  </div>
+  <div>
+    Tons of <em>tooling</em>, modules, even graphical query editors
+  </div>
+  <div>
+    A popular community Graph<span class="bubblegum">QL</span> framework is <em>Apollo</em>
+  </div>
+  <div>
+    <pre><code>
+      const { ApolloServer, gql } = require('apollo-server')
+
+      const typeDefs = gql`
+        type Query { hello: String }
+      `
+
+      const resolvers = {
+        Query: { hello: () => 'world' }
+      }
+
+      const server = new ApolloServer({ typeDefs, resolvers })
+      server.listen()
+    </code></pre>
+  </div>
+  <div>
+    Introducing <em>graphql-hooks</em> for React!
+  </div>
+  <div>
+    <u><em>Setup</em></u>
+    <ul>
+      <li>Node v10.16.0</li>
+      <li>clone github repository<br />
+      <code>git clone git@github.com:nearform/graphql-hooks-workshop.git</code></li>
+    </ul>
+  </div>
+  <div><em>Part 1:</em> Hello World</div>
+  <div>
+    <u><em>Hello World</em></u>
+    <ul>
+      <li><code>cd graphql-hooks-workshop/exercises/part-1-hello-world/</code></li>
+      <li><code>npm install</code></li>
+      <li><code>npm run watch</code></li>
+    </ul>
+  </div>
+  <div>
+    Test in browser: <span class="bubblegum">http://localhost:3000</span>
+  </div>
+  <div><span class="bubblegum">graph</span><i>i</i><em>QL</em></div>
+  <div>
+  <span class="bubblegum">graph</span><i>i</i><em>QL</em>
+    is an in-browser IDE for exploring GraphQL<br />
+  </div>
+  <div>
+    <span class="bubblegum">
+      http://localhost:3000/graphiql.html
+    </span>
+    <code>
+      <pre>
+        {
+          users {
+            name
+          }
+        }
+      </pre>
+    </code>
+  </div>
+  <div><em>Part 2:</em> Schema</div>
+  <div>
+    <u><em>Schema</em></u>
+    <ul>
+      <li><code>cd graphql-hooks-workshop/exercises/part-2-schema/</code></li>
+      <li><code>npm install</code></li>
+      <li><code>npm run watch</code></li>
+    </ul>
+  </div>
+  <div><em>Part 3:</em> graphql-hooks</div>
+  <div>
+    <u><em>graphql-hooks</em></u>
+    <ul>
+      <li><code>cd graphql-hooks-workshop/exercises/part-3-hooks/</code></li>
+      <li><code>npm install</code></li>
+      <li><code>npm run watch</code></li>
+    </ul>
+  </div>
+  <div><em>Part 4:</em> Caching</div>
+  <div>
+    <u><em>Caching</em></u>
+    <ul>
+      <li><code>cd graphql-hooks-workshop/exercises/part-4-caching/</code></li>
+      <li><code>npm install</code></li>
+      <li><code>npm run watch</code></li>
+    </ul>
+  </div>
+  <div><em>Part 5:</em> Server Side Rendering</div>
+  <div>
+    <u><em>Server Side Rendering</em></u>
+    <ul>
+      <li><code>cd graphql-hooks-workshop/exercises/part-5-ssr/</code></li>
+      <li><code>npm install</code></li>
+      <li><code>npm run watch</code></li>
+    </ul>
+  </div>
+  <div><em>Part 6:</em> Pagination</div>
+  <div>
+    <u><em>Pagination</em></u>
+    <ul>
+      <li><code>cd graphql-hooks-workshop/exercises/part-6-pagination/</code></li>
+      <li><code>npm install</code></li>
+      <li><code>npm run watch</code></li>
+    </ul>
+  </div>
+  <div>
+    Hence <em>JSON schema</em> was created
+  </div>
+  <div>
+    What about <em>filtering</em> responses?
+  </div>
+  <div>
+    Using graphql-hooks is awesome!
+  </div>
+  <div class="title">
+    <div style="height: 30%" class="bubblegum">
+      Thanks
+    </div>
+    <div style="font-size: 0.2em">
+      <em>@</em>mafintosh
+      <em>@</em>matteocollina
+    </div>
+  </div>
+  <div>
+    <img src='./nearform.svg' width='100'>
+  </div>
+</body>
+</html>

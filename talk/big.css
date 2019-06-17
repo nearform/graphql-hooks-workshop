@@ -1,0 +1,206 @@
+@font-face {
+  font-family: 'Archia';
+  font-style: normal;
+  font-weight: 400;
+  src:
+    local('Archia'),
+    local('Archia-SemiBold'),
+    url('./fonts/Archia-SemiBold.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Campton Bold';
+  font-style: normal;
+  font-weight: 400;
+  src:
+    url('./fonts/Campton-Bold.otf') format('opentype');
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: Archia, -apple-system, BlinkMacSystemFont, 'avenir next', avenir, helvetica, 'helvetica neue', ubuntu, roboto, noto, 'segoe ui', arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+.presentation-container.bg-img {
+  width: 100%;
+  height: 100%;
+}
+
+.presentation-container.bg-img .slide-container {
+  width: 100% !important;
+  height: 100% !important;
+  background-size: cover;
+}
+
+.logo {
+  background: url('./nearform.png');
+  background-size: 100%;
+  width: 475px;
+  height: 535px;
+  margin: auto;
+}
+
+a {
+  color: #fff;
+  text-decoration-skip: ink;
+  border-radius: 6px;
+}
+
+em {
+  font-style: normal;
+}
+
+.light {
+  background: #f5f5f5;
+  color: #34383e;
+}
+
+.light em {
+  color: #d13787;
+}
+
+body.code {
+  background: #272c32;
+}
+
+.light a {
+  color: #0889d1;
+}
+
+.dark a {
+  color: #F2F2EA;
+}
+
+.dark a:hover {
+  background: #ACADA5;
+}
+
+.invert {
+  color: #2165E5;
+  background: #FFFFFF;
+}
+
+.dark {
+  background: #2165E5;
+  color: #FFFFFF;
+}
+
+.dark em {
+  color: #FD7A9E;
+}
+
+.light a:hover {
+  color: #0069a4;
+}
+
+img {
+  width: 100%;
+}
+
+div.slide-container {
+  background-size: 100%;
+  display: flex;
+  align-items: center;
+}
+
+div.slide {
+  box-sizing: border-box;
+  cursor: pointer;
+  cursor: hand;
+  padding: 4%;
+}
+
+div.imageText {
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* normally not good, but ok in context of full screen directional navigation */
+.talk-mode .slide:focus {
+  outline: 0;
+}
+
+body.talk-mode {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+body.print-mode {
+  background: #fff;
+  color: #000;
+  font-weight: normal;
+  padding: 30px 20px;
+}
+
+body.print-mode div.sub-container {
+  padding: 10px 20px;
+  display: flex;
+  flex-flow: row wrap;
+  page-break-after: always;
+}
+
+ul.notes-list {
+  display: inline-block;
+  float: left;
+  vertical-align: top;
+}
+
+body.print-mode div.slide-container {
+  border: 1px solid #000;
+}
+
+body.jump-mode {
+  padding: 10px;
+}
+
+body.jump-mode div.sub-container {
+  display: inline-block;
+  vertical-align: top;
+  padding: 2px;
+}
+
+body.jump-mode div.slide-container {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+
+body.jump-mode div.slide-container:hover {
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.title {
+  font-family: Campton-Bold, -apple-system, BlinkMacSystemFont, 'avenir next', avenir, helvetica, 'helvetica neue', ubuntu, roboto, noto, 'segoe ui', arial, sans-serif;
+}
+
+.white-bg {
+  background: white;
+}
+
+.fg-bg {
+  background: rgb(27, 30, 39);
+}
+
+.bubblegum {
+  color: #F6BAB8;
+}
+
+.brunchPink {
+  color: #FB7A9C;
+}
+
+.supersplit {
+  color: #FB775E;
+}
