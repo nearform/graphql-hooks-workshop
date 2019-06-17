@@ -52,23 +52,7 @@
     Tons of <em>tooling</em>, modules, even graphical query editors
   </div>
   <div>
-    A popular community Graph<span class="bubblegum">QL</span> framework is <em>Apollo</em>
-  </div>
-  <div>
-    <pre><code>
-      const { ApolloServer, gql } = require('apollo-server')
-
-      const typeDefs = gql`
-        type Query { hello: String }
-      `
-
-      const resolvers = {
-        Query: { hello: () => 'world' }
-      }
-
-      const server = new ApolloServer({ typeDefs, resolvers })
-      server.listen()
-    </code></pre>
+    You may be familiar with frameworks such as <em>Apollo</em> and <em>Relay</em>
   </div>
   <div>
     Introducing <em>graphql-hooks</em> for React!
@@ -83,6 +67,14 @@
   </div>
   <div><em>Part 1:</em> Hello World</div>
   <div>
+    <ul>
+      <li>node.js</li>
+      <li>fastify</li>
+      <li>react</li>
+      <li>graphQL</li>
+    </ul>
+  </div>
+  <div>
     <u><em>Hello World</em></u>
     <ul>
       <li><code>cd graphql-hooks-workshop/exercises/part-1-hello-world/</code></li>
@@ -91,7 +83,16 @@
     </ul>
   </div>
   <div>
-    Test in browser: <span class="bubblegum">http://localhost:3000</span>
+    <span class="bubblegum">http://localhost:3000</span>
+  </div>
+  <div>
+    Anatomy of <em><code>src/graphql.js</code></em>
+    <ul>
+      <li><span class="bubblegum">fastify-gql</span> module</li>
+      <li>schema</li>
+      <li>resolvers</li>
+      <li>data</li>
+    </ul>
   </div>
   <div><span class="bubblegum">graph</span><i>i</i><em>QL</em></div>
   <div>
@@ -102,6 +103,9 @@
     <span class="bubblegum">
       http://localhost:3000/graphiql.html
     </span>
+  </div>
+  <div>
+    <em>QUERY</em>
     <code>
       <pre>
         {
@@ -112,6 +116,7 @@
       </pre>
     </code>
   </div>
+  <div>Any <span class="bubblegum">issues?</span></div>
   <div><em>Part 2:</em> Schema</div>
   <div>
     <u><em>Schema</em></u>
@@ -158,13 +163,7 @@
     </ul>
   </div>
   <div>
-    Hence <em>JSON schema</em> was created
-  </div>
-  <div>
-    What about <em>filtering</em> responses?
-  </div>
-  <div>
-    Using graphql-hooks is awesome!
+    <em>graphql-hooks</em> are <span class="bubblegum">awesome!</span>
   </div>
   <div class="title">
     <div style="height: 30%" class="bubblegum">
