@@ -18,10 +18,11 @@
 - Fix installation issues
 - View GraphiQL interface http://localhost:3000/graphiql.html
 
-## [Part 2 - graphQL schema for connecting with `graphql-hooks`](https://github.com/nearform/graphql-hooks-workshop/tree/master/part-2-schema)
+## [Part 2 - graphQL skeleton for connecting with `graphql-hooks`](https://github.com/nearform/graphql-hooks-workshop/tree/master/part-2-skeleton)
 
 - Display a list of 'users'
 - Create a new 'user'
+- Create a new file: `src/app/pages/ListUsers.js`
 
 ## [Part 3 - graphQL-hooks](https://github.com/nearform/graphql-hooks-workshop/tree/master/part-3-hooks)
 

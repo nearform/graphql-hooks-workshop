@@ -1,4 +1,4 @@
-# Part 2 - graphQL schema for `graphql-hooks`
+# Part 2 - graphQL skeleton for `graphql-hooks`
 
 - Goal 1: Display a list of 'users'
 - Goal 2: Create a new 'user'

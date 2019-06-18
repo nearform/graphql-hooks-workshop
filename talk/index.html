@@ -106,7 +106,7 @@
   </div>
   <div>
     <em>QUERY</em>
-    <pre><code class=gql>
+    <pre><code>
         {
           users {
             name
@@ -114,20 +114,25 @@
         }
     </code></pre>
   </div>
-  <div><em>Part 2:</em> Graph<span class="bubblegum">QL</span> Schema</div>
+  <div><em>Part 2:</em> Graph<span class="bubblegum">QL</span> Skeleton</div>
   <div><em>Goal 1:</em> Display List of 'users'</div>
   <div><em>Goal 2:</em> Create a new 'user'</div>
   <div>
-    <u>Graph<span class="bubblegum">QL</span> Schema</u>
+    <u>Graph<span class="bubblegum">QL</span> Skeleton</u>
     <ul>
-      <li><code>cd graphql-hooks-workshop/exercises/part-2-schema/</code></li>
+      <li><code>cd graphql-hooks-workshop/exercises/part-2-skeleton/</code></li>
       <li><code>npm install</code></li>
       <li><code>npm run watch</code></li>
     </ul>
   </div>
-  <div><em>Create a new file</em> <pre><code class=javascript>src/app/pages/ListUsers.js</code></pre></div>
+  <div><em>Create a new file</em> <code class=javascript><pre>src/app/pages/ListUsers.js</pre></code></div>
   <div>
-    <em>Import React and useState -- export ListUser component function</em>
+    <em>
+      <ul>
+        <li>Import React and useState</li>
+        <li>Export and define the 'ListUser' component function</li>
+      </ul>
+    </em>
     <pre><code class=javascript>
 import React, { useState } from 'react'
 
@@ -179,7 +184,7 @@ return (
     </pre></code>
   </div>
   <div>
-    <em>Make createNewUser function</em>
+    <em>Make 'createNewUser' function</em>
     <pre><code class=javascript>
 async function createNewUser() {
   await createUser({ name })
@@ -221,7 +226,7 @@ export default function ListUsers ({ users, createUser }) {
 }
     </code></pre>
   </div>
-  <div><em>Modify existing file</em> <pre><code class=javascript>src/app/AppShell.js</code></pre></div>
+  <div><em>Modify existing file</em> <code class=javascript><pre>src/app/AppShell.js</pre></code></div>
   <div>
     <em>Include our new component:</em>
     <pre><code class=javascript>import ListUsers from './pages/ListUsers'</code></pre>
@@ -243,7 +248,13 @@ const createUser =
     </code></pre>
   </div>
   <div>
-    <em>Render the ListUsers component, pass USERS to be displayed and the createUser method</em>
+    <em>
+      <ul>
+        <li>Render the 'ListUsers' component</li>
+        <li>Pass 'USERS' list to be displayed</li>
+        <li>Pass 'createUser' method to child component</li>
+      </ul>
+    </em>
     <pre><code class=html>
 &lt;h1>Users List&lt;/h1>
 &lt;ListUsers
@@ -259,8 +270,9 @@ const createUser =
       <li><span class="bubblegum">http://localhost:3000</span></li>
     </ul>
   </div>
+  <div>Any <span class="bubblegum">issues?</span></div>
   <div><em>Part 3:</em> graphql-hooks</div>
-  <div><em>graphql-hooks</em> is a tiny hooks-first and super-fast GraphQL client</div>
+  <div><em>graphql-hooks</em> is a tiny hooks-first and super-fast Graph<span class="bubblegum">QL</span> client</div>
   <div>
     <u><em>graphql-hooks</em></u>
     <ul>
@@ -269,10 +281,10 @@ const createUser =
       <li><code>npm run watch</code></li>
     </ul>
   </div>
-  <div><pre><code class=javascript>npm install graphql-hooks --save</code></pre></div>
-  <div><em>Modify file</em> <pre><code class=javascript>src/app/pages/ListUsers.js</code></pre></div>
+  <div><code class=javascript><pre>npm install graphql-hooks --save</pre></code></div>
+  <div><em>Modify file</em> <code class=javascript><pre>src/app/pages/ListUsers.js</pre></code></div>
   <div>
-    <em>Import useQuery and useMutation from graphql-hooks</em>
+    <em>Import 'useQuery' from graphql-hooks</em>
     <pre><code class=javascript>import { useQuery } from 'graphql-hooks'</code></pre>
   </div>
   <div>
@@ -306,7 +318,7 @@ const {
     </code></pre>
   </div>
   <div>
-    <em>useMutation</em>
+    <em>Also import 'useMutation' from graphql-hooks</em>
     <pre><code class=javascript>import { useQuery, useMutation } from 'graphql-hooks'</code></pre>
   </div>
   <div>
@@ -329,7 +341,7 @@ const [createUser] =
     </code></pre>
   </div>
   <div>
-    <em>Update the createNewUser function</em>
+    <em>Update the 'createNewUser' function</em>
     <pre><code class=javascript>
 async function createNewUser() {
   await createUser({
@@ -342,7 +354,7 @@ async function createNewUser() {
     </code></pre>
   </div>
   <div>
-    <em>Add error handling, data.users, and unique key</em>
+    <em>Add error handling, data.users, and unique keys</em>
     <code><pre>
       if (loading) {
         return &lt;div>
@@ -366,7 +378,45 @@ async function createNewUser() {
             &lt;/ul> ...
     </code></pre>
   </div>
-  <div><em>Modify file</em> <pre><code class=javascript>src/client/js/app-shell.js</code></pre></div>
+  <div><em>Modify file</em> <code class=javascript><pre>src/client/js/app-shell.js</pre></code></div>
+  <div>
+    <em>Import 'GraphQLClient' and 'ClientContext' from graphql-hooks</em>
+    <pre><code class=javascript>
+import { GraphQLClient, ClientContext } from 'graphql-hooks'
+    </code></pre>
+  </div>
+  <div>
+    <em>Create a GraphQL client with a path</em>
+    <pre><code class=javascript>
+const client = new GraphQLClient({
+    url: '/graphql'
+  })
+    </code></pre>
+  </div>
+  <div>
+    <em>Wrap 'AppShell' in the 'ClientContext' provider</em>
+    <pre><code class=javascript>
+const App = (
+    &lt;ClientContext.Provider value={client}>
+      &lt;AppShell />
+    &lt;/ClientContext.Provider>
+  )
+    </code></pre>
+  </div>
+  <div>
+    <em>If you want... <br />update the title in... </em>
+    <pre><code class=javascript>src/app/AppShell.js</code></pre>
+    <em>with</em>
+    <code class=javascript><pre>&lt;h1>GraphQL Hooks&lt;/h1></pre></code>
+  </div>
+  <div>
+    <em><u>Check your work</u></em>
+    <ul>
+      <li><code>npm run watch</code></li>
+      <li><span class="bubblegum">http://localhost:3000</span></li>
+    </ul>
+  </div>
+  <div>Any <span class="bubblegum">issues?</span></div>
   <div><em>Part 4:</em> Caching</div>
   <div>
     <u><em>Caching</em></u>
