@@ -15,7 +15,6 @@
     const [name, setName] = useState('')
 
     async function createNewUser() {
-      console.log
       await createUser({ name })
       setName('')
     }

@@ -128,7 +128,7 @@
       <li><code>npm run watch</code></li>
     </ul>
   </div>
-  <div><em>Create a new file</em> <code>src/app/pages/ListUsers.js</code></div>
+  <div><em>Create a new file</em> <code><pre>src/app/pages/ListUsers.js</pre></code></div>
   <div>
     <em>Import React and useState -- export ListUser component function</em>
     <code><pre>
@@ -223,7 +223,7 @@ export default function ListUsers ({ users, createUser }) {
 }
     </pre></code>
   </div>
-  <div><em>Modify existing file</em> <code>src/app/AppShell.js</code></div>
+  <div><em>Modify existing file</em> <code><pre>src/app/AppShell.js</pre></code></div>
   <div>
     <em>Include our new component:</em>
     <code><pre>import ListUsers from './pages/ListUsers'</pre></code>
@@ -255,13 +255,14 @@ const createUser = user => USERS.push(user)
     </pre></code>
   </div>
   <div>
-    <em>Check your work</em>
+    <em><u>Check your work</u></em>
     <ul>
       <li><code>npm run watch</code></li>
       <li><span class="bubblegum">http://localhost:3000</span></li>
     </ul>
   </div>
   <div><em>Part 3:</em> graphql-hooks</div>
+  <div><em>graphql-hooks</em> is a module to connect react and graphQL or something like that</div>
   <div>
     <u><em>graphql-hooks</em></u>
     <ul>
@@ -270,6 +271,88 @@ const createUser = user => USERS.push(user)
       <li><code>npm run watch</code></li>
     </ul>
   </div>
+  <div><code><pre>npm install graphql-hooks --save</pre></code></div>
+  <div><em>Modify file</em> <code><pre>src/app/pages/ListUsers.js</pre></code></div>
+  <div>
+    <em>Import useQuery and useMutation from graphql-hooks</em>
+    <code><pre>import { useQuery, useMutation } from 'graphql-hooks'</pre></code>
+  </div>
+  <div>
+    <em>Define a new Query</em>
+    <code><pre>
+const LIST_USERS_QUERY = `
+  query ListUsersQuery {
+    users {
+      name
+    }
+  }
+`
+    </pre></code>
+  </div>
+  <div>
+    <em>Define a new Mutation </em>
+    <code><pre>
+const CREATE_USER_MUTATION = `
+  mutation CreateUser($name: String!) {
+    createUser(name: $name) {
+      name
+    }
+  }
+`
+    </pre></code>
+  </div>
+  <div>
+    <em>Assign the Query</em>
+    <code><pre>
+const {
+  loading,
+  data = { users: [] },
+  error,
+  refetch: refetchUsers } = useQuery(LIST_USERS_QUERY)
+    </pre></code>
+  </div>
+  <div>
+    <em>Assign the Mutation </em>
+    <code><pre>
+const [createUser] = useMutation(CREATE_USER_MUTATION)
+    </pre></code>
+  </div>
+  <div>
+    <em>Update the createNewUser function</em>
+    <code><pre>
+async function createNewUser() {
+  await createUser({ variables: { name } })
+  setName('')
+  refetchUsers()
+}
+    </pre></code>
+  </div>
+  <div>
+    <em>Add error handling, data.users, and unique key</em>
+    <code><pre>
+      if (loading) {
+        return &lt;div>
+          Loading...
+        &lt;/div>
+      }
+
+      if (error) {
+        return &lt;div>
+          Error occured.
+        &lt;/div>
+      }
+
+      if (!loading && !error && data.users) {
+        return (
+          &lt;div>
+            &lt;ul>
+              {data.users.map((user, i) => &lt;li key={i}>
+                {user.name}
+              &lt;/li>)}
+            &lt;/ul> ...
+    </pre></code>
+  </div>
+  <div><em>Modify file</em> <code><pre>src/client/js/app-shell.js</pre></code></div>
   <div><em>Part 4:</em> Caching</div>
   <div>
     <u><em>Caching</em></u>
