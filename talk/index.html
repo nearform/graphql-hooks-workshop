@@ -54,6 +54,9 @@
     You may be familiar with frameworks such as <em>Apollo</em> and <em>Relay</em>
   </div>
   <div>
+    What about <em>React?</em>
+  </div>
+  <div>
     Introducing <em>graphql-hooks</em> for React!
   </div>
   <div>
@@ -282,7 +285,7 @@ const createUser =
     </ul>
   </div>
   <div><code class=javascript><pre>npm install graphql-hooks --save</pre></code></div>
-  <div><em>Modify file</em> <code class=javascript><pre>src/app/pages/ListUsers.js</pre></code></div>
+  <div><em>Modify existing file</em> <code class=javascript><pre>src/app/pages/ListUsers.js</pre></code></div>
   <div>
     <em>Import 'useQuery' from graphql-hooks</em>
     <pre><code class=javascript>import { useQuery } from 'graphql-hooks'</code></pre>
@@ -356,29 +359,29 @@ async function createNewUser() {
   <div>
     <em>Add error handling, data.users, and unique keys</em>
     <code><pre>
-      if (loading) {
-        return &lt;div>
-          Loading...
-        &lt;/div>
-      }
+if (loading) {
+  return &lt;div>
+    Loading...
+  &lt;/div>
+}
 
-      if (error) {
-        return &lt;div>
-          Error occured.
-        &lt;/div>
-      }
+if (error) {
+  return &lt;div>
+    Error occured.
+  &lt;/div>
+}
 
-      if (data.users) {
-        return (
-          &lt;div>
-            &lt;ul>
-              {data.users.map((user, i) => &lt;li key={i}>
-                {user.name}
-              &lt;/li>)}
-            &lt;/ul> ...
+if (data.users) {
+  return (
+    &lt;div>
+      &lt;ul>
+        {data.users.map((user, i) => &lt;li key={i}>
+          {user.name}
+        &lt;/li>)}
+      &lt;/ul> ...
     </code></pre>
   </div>
-  <div><em>Modify file</em> <code class=javascript><pre>src/client/js/app-shell.js</pre></code></div>
+  <div><em>Modify existing file</em> <code class=javascript><pre>src/client/js/app-shell.js</pre></code></div>
   <div>
     <em>Import 'GraphQLClient' and 'ClientContext' from graphql-hooks</em>
     <pre><code class=javascript>
@@ -389,18 +392,18 @@ import { GraphQLClient, ClientContext } from 'graphql-hooks'
     <em>Create a GraphQL client with a path</em>
     <pre><code class=javascript>
 const client = new GraphQLClient({
-    url: '/graphql'
-  })
+  url: '/graphql'
+})
     </code></pre>
   </div>
   <div>
     <em>Wrap 'AppShell' in the 'ClientContext' provider</em>
     <pre><code class=javascript>
 const App = (
-    &lt;ClientContext.Provider value={client}>
-      &lt;AppShell />
-    &lt;/ClientContext.Provider>
-  )
+  &lt;ClientContext.Provider value={client}>
+    &lt;AppShell />
+  &lt;/ClientContext.Provider>
+)
     </code></pre>
   </div>
   <div>
@@ -419,6 +422,20 @@ const App = (
   <div>Any <span class="bubblegum">issues?</span></div>
   <div><em>Part 4:</em> Caching</div>
   <div>
+    <em>refetch</em> no more
+  </div>
+  <div>
+    <em>graphql-hooks</em> supports custom cache plug-ins
+  </div>
+  <div>
+    <em><u>graphql-hooks-memcache</u></em>
+    <ul>
+      <li>document based</li>
+      <li>creates a hash of the operation and its options</li>
+      <li>stores it in a simple k/v store</li>
+    </ul>
+  </div>
+  <div>
     <u><em>Caching</em></u>
     <ul>
       <li><code>cd graphql-hooks-workshop/exercises/part-4-caching/</code></li>
@@ -426,7 +443,168 @@ const App = (
       <li><code>npm run watch</code></li>
     </ul>
   </div>
-  <div><em>Part 5:</em> Server Side Rendering</div>
+  <div>
+    <em>Install the in-memory cache plugin</em>
+    <code class=javascript><pre>npm install graphql-hooks-memcache --save</pre></code>
+  </div>
+  <div>
+    <em>Modify existing file</em>
+    <code class=javascript><pre>src/client/js/app-shell.js</pre></code>
+  </div>
+  <div>
+    <em>Import 'graphql-hooks-memcache'</em>
+    <pre><code class=javascript>import memCache from 'graphql-hooks-memcache'</code></pre>
+  </div>
+  <div>
+    <em>Update the GraphQL client</em>
+    <pre><code class=javascript>
+const initialState = window.__INITIAL_STATE__
+const client = new GraphQLClient({
+  url: '/graphql',
+  cache: memCache({ initialState })
+})
+    </code></pre>
+  </div>
+  <div>
+    That was <em>easy</em>
+  </div>
+  <div>
+    a little <em>too</em> easy
+  </div>
+  <div>
+    So... let's <em>test</em> it
+  </div>
+  <div>
+    If we make a manual <span class="bubblegum">query</span> and then unmount and mount the 'ListUsers' component, we can test that the <em>cache</em> is working
+  </div>
+  <div>
+    <em>Let's use @reach/router to leave and return to the page</em>
+    <code class=javascript><pre>npm install @reach/router --save</pre></code>
+  </div>
+  <div>
+    <em>Modify existing file</em>
+    <code class=javascript><pre>src/app/pages/ListUser.js</pre></code>
+  </div>
+  <div>
+    <em>Import 'useManualQuery' from graphql-hooks</em>
+    <pre><code class=javascript>import { useQuery, useMutation, useManualQuery } from 'graphql-hooks'</code></pre>
+  </div>
+  <div>
+    <em>Define a new Manual Query</em>
+    <pre><code class=javascript>
+const GET_FIRST_USER_QUERY = `
+    query FirstUser {
+      firstUser {
+        name
+      }
+    }
+  `
+    </code></pre>
+  </div>
+  <div>
+    <em>Create a function to trigger with a button</em>
+    <pre><code class=javascript>
+const [getFirstUser, { data: firstUserData }] = useManualQuery(
+  GET_FIRST_USER_QUERY
+)
+    </code></pre>
+  </div>
+  <div>
+    <em>Add the button</em>
+    <pre><code>
+&lt;div>
+  &lt;br />Trigger query, click 'Test Cache' and then 'Home' to test cache
+&lt;/div>
+&lt;button onClick={getFirstUser}>Manually trigger Query&lt;/button>
+&lt;div>First User: {firstUserData && firstUserData.firstUser.name}&lt;/div>
+    </code></pre>
+  </div>
+  <div><em>Create a new file</em> <code class=javascript><pre>src/app/pages/TestPage.js</pre></code></div>
+  <div>
+    <em>
+      <ul>
+        <li>Import React</li>
+        <li>Export and define the 'TestPage' component</li>
+      </ul>
+    </em>
+    <pre><code class=javascript>
+import React from 'react'
+
+export default function TestPage() {
+
+  return (
+    &lt;div>
+      &lt;br />Return Home to test if data is cached without querying
+    &lt;/div>
+  )
+}
+    </code></pre>
+  </div>
+  <div><em>Create another new file</em> <code class=javascript><pre>src/app/pages/NotFoundPage.js</pre></code></div>
+  <div>
+    <em>
+      <ul>
+        <li>Import React</li>
+        <li>Export and define the 'NotFoundPage' component</li>
+      </ul>
+    </em>
+    <pre><code class=javascript>
+import React from 'react'
+
+export default function TestPage() {
+  return &lt;div>404 - Not Found&lt;/div>
+}
+    </code></pre>
+  </div>
+  <div><em>Modify existing file</em> <code class=javascript><pre>src/app/AppShell.js</pre></code></div>
+  <div>
+    <em>Import 'Link' and 'Router' from @reach/router</em>
+    <pre><code class=javascript>import { Link, Router } from '@reach/router'</code></pre>
+  </div>
+  <div>
+    <em>Add our new components to our 'ListUsers' component</em>
+    <pre><code class=javascript>
+import ListUsers from './pages/ListUsers'
+import TestPage from './pages/TestPage'
+import NotFoundPage from './pages/NotFoundPage'
+    </code></pre>
+  </div>
+  <div>
+    <em>Create a simple navigation and router</em>
+    <pre><code>
+&lt;nav>
+  &lt;Link to="/">Home&lt;/Link> |
+  &lt;Link to="/test"> Test Cache&lt;/Link>
+&lt;/nav>
+&lt;Router>
+  &lt;ListUsers path='/' />
+  &lt;TestPage path="/test" />
+  &lt;NotFoundPage default />
+&lt;/Router>
+    </code></pre>
+  </div>
+  <div>
+    <em><u>Test the cache</u></em>
+    <ul>
+      <li><code>npm run watch</code></li>
+      <li><span class="bubblegum">http://localhost:3000</span></li>
+      <li>Trigger the Manual Query</li>
+      <li>Navigate away to test</li>
+    </ul>
+  </div>
+  <div>Any <span class="bubblegum">issues?</span></div>
+  <div><em>Part 5:</em> <span class="bubblegum">S</span>erver <span class="bubblegum">S</span>ide <span class="bubblegum">R</span>endering</div>
+  <div>
+    <ul>
+      <li>Finds all instances of <code>useQuery</code> and resolves them</li>
+      <li>Re-renders all queries</li>
+      <li>Verifies all queries have been resolved</li>
+      <li>Populates the cache with the queries</li>
+      <li>Serialises the cache in the html payload to the app</li>
+      <li>Parses the JSON</li>
+      <li>Passes it to memcache as its initial value</li>
+    </ul>
+  </div>
   <div>
     <u><em>Server Side Rendering</em></u>
     <ul>
@@ -435,7 +613,86 @@ const App = (
       <li><code>npm run watch</code></li>
     </ul>
   </div>
+  <div>
+    <em>Install graphql-hooks-ssr and isomorphic-unfetch</em>
+    <code class=javascript><pre>
+npm install graphql-hooks-ssr --save
+npm install isomorphic-unfetch --save
+    </pre></code></div>
+  <div>
+    <em>Modify existing file</em>
+    <code class=javascript><pre>src/server/handlers/app-shell.js</pre></code>
+  </div>
+  <div>
+    <em>Import 'getInitialState' from graphql-hooks-ssr</em>
+    <pre><code class=javascript>const { getInitialState } = require('graphql-hooks-ssr')</code></pre>
+  </div>
+  <div>
+    <em>Create a GraphQL client similar to the front-end</em>
+    <pre><code class=javascript>
+const client = new GraphQLClient({
+  url: 'http://127.0.0.1:3000/graphql',
+  cache: memCache(),
+  fetch: require('isomorphic-unfetch'),
+  logErrors: true
+})
+    </code></pre>
+  </div>
+  <div>
+    <em>Create 'App' -- similar to the front-end</em>
+    <pre><code class=javascript>
+const App = (
+  &lt;ClientContext.Provider value={client}>
+    &lt;AppShell />
+  &lt;/ClientContext.Provider>
+)
+    </code></pre>
+  </div>
+  <div>
+    <em>Define initialState, content, and scripts</em>
+    <pre><code class=javascript>
+const initialState = await getInitialState({ App, client })
+const content = ReactDOMServer.renderToString(App)
+const scripts = await renderScripts({ initialState })
+    </code></pre>
+  </div>
+  <div>
+    <em>Create the renderScripts function</em>
+    <pre><code class=javascript>
+async function renderScripts({ initialState }) {
+  const appShellBundlePath = await getBundlePath('app-shell.js')
+  return `
+    &lt;script type="text/javascript">
+      window.__INITIAL_STATE__=${JSON.stringify(initialState).replace(
+        /&lt;/g,
+        '\\u003c'
+      )};
+    &lt;/script>
+    &lt;script src="${appShellBundlePath}">&lt;/script>
+  `
+}
+    </code></pre>
+  </div>
+  <div><em>Modify existing file</em> <code class=javascript><pre>src/client/js/app-shell.js</pre></code></div>
+  <div>
+    <em>Replace 'render' with 'hydrate' -- necessary for SSR</em><br /><br />
+    here:
+    <pre><code class=javascript>import { hydrate } from 'react-dom'</code></pre>
+    and here:
+    <pre><code class=javascript>hydrate(App, document.getElementById('app-root'))</code></pre>
+  </div>
+  <div>
+    <em><u>Check your Work</u></em>
+    <ul>
+      <li><code>npm run watch</code></li>
+      <li><span class="bubblegum">http://localhost:3000</span></li>
+      <li>View Page Source</li>
+    </ul>
+  </div>
+  <div>Any <span class="bubblegum">issues?</span></div>
   <div><em>Part 6:</em> Pagination</div>
+  <div><span class="bubblegum">graphql-hooks</span> does page-based <em>pagination</em> and infinite scrolling</div>
+  <div>Let's implement page-based <em>pagination</em></div>
   <div>
     <u><em>Pagination</em></u>
     <ul>
@@ -444,6 +701,106 @@ const App = (
       <li><code>npm run watch</code></li>
     </ul>
   </div>
+  <div><em>Create a new file</em> <code class=javascript><pre>src/app/pages/PaginationPage.js</pre></code></div>
+  <div>
+    <em>
+      <ul>
+        <li>Import React and useState</li>
+        <li>Import 'useQuery' from graphql-hooks
+      </ul>
+    </em>
+    <pre><code class=javascript>
+import React, { useState } from 'react'
+import { useQuery } from 'graphql-hooks'
+    </code></pre>
+  </div>
+  <div>
+    <em>Define a new Query</em>
+    <pre><code class=javascript>
+const USERS_QUERY = `
+  query UsersQuery($skip: Int, $limit: Int) {
+    users(skip: $skip, limit: $limit) {
+      name
+    }
+  }
+`
+    </code></pre>
+  </div>
+  <div>
+    <em>Create and export the PaginationPage component</em>
+    <pre><code class=javascript>
+export default function PaginationPage() {
+  return &lt;div />
+}
+    </code></pre>
+  </div>
+  <div>
+    <em>Initialize the state variables</em>
+    <pre><code class=javascript>
+const [page, setPage] = useState(1)
+    </code></pre>
+  </div>
+  <div>
+    <em>Let's execute the query</em>
+    <pre><code class=javascript>
+const { data } = useQuery(USERS_QUERY, {
+    variables: {
+      limit: 1,
+      skip: page - 1
+    }
+  })
+    </code></pre>
+  </div>
+  <div>
+    <em>Update the return()
+      <ul>
+        <li>List only current 'user'</li>
+        <li>Create buttons for navigating through 'USERS'</li>
+      </ul>
+    </em>
+    <pre><code class=javascript>
+return (
+  &lt;div>
+    &lt;h2>Pagination&lt;/h2>
+    &lt;ul>
+      {data &&
+        data.users &&
+        data.users.map((user, i) =>
+          &lt;li key={i}>{user.name}&lt;/li>
+        )}
+    &lt;/ul>
+    &lt;button onClick={() => setPage(page - 1)}>Prev&lt;/button>
+    &lt;button onClick={() => setPage(page + 1)}>Next&lt;/button>
+  &lt;/div>
+)
+    </code></pre>
+  </div>
+  <div><em>Modify existing file</em> <code class=javascript><pre>src/app/AppShell.js</pre></code></div>
+  <div>
+    <em>Include our new component:</em>
+    <pre><code class=javascript>import PaginationPage from './pages/PaginationPage'</code></pre>
+  </div>
+  <div>
+    <em>Add a link to the Navigation</em>
+    <pre><code class=javascript>&lt;Link to="/users">PaginationPage&lt;/Link></code></pre>
+  </div>
+  <div>
+    <em>Add a path for the Router</em>
+    <pre><code class=javascript>&lt;PaginationPage path="/users" /></code></pre>
+  </div>
+  <div><em>Modify existing file</em> <code class=javascript><pre>src/server/index.js</pre></code></div>
+  <div>
+    <em>Add a path for fastify</em>
+    <pre><code class=javascript>app.get('/users', appShellHandler)</code></pre>
+  </div>
+  <div>
+    <em><u>Check your Work</u></em>
+    <ul>
+      <li><code>npm run watch</code></li>
+      <li><span class="bubblegum">http://localhost:3000</span></li>
+    </ul>
+  </div>
+  <div>Any <span class="bubblegum">issues?</span></div>
   <div>
     <em>graphql-hooks</em> are <span class="bubblegum">awesome!</span>
   </div>
