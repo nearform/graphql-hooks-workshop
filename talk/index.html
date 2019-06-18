@@ -32,8 +32,7 @@
       <em><i><span class="blink">Workshop</span></i></em>
     </div>
     <div style="font-size: 0.2em">
-      <span class="supersplit">@</span>mafintosh
-      <span class="supersplit">@</span>matteocollina
+      <span class="supersplit">@</span>...
     </div>
   </div>
   <div>
@@ -107,15 +106,13 @@
   </div>
   <div>
     <em>QUERY</em>
-    <code>
-      <pre>
+    <pre><code class=gql>
         {
           users {
             name
           }
         }
-      </pre>
-    </code>
+    </code></pre>
   </div>
   <div><em>Part 2:</em> Graph<span class="bubblegum">QL</span> Schema</div>
   <div><em>Goal 1:</em> Display List of 'users'</div>
@@ -128,34 +125,26 @@
       <li><code>npm run watch</code></li>
     </ul>
   </div>
-  <div><em>Create a new file</em> <code><pre>src/app/pages/ListUsers.js</pre></code></div>
+  <div><em>Create a new file</em> <pre><code class=javascript>src/app/pages/ListUsers.js</code></pre></div>
   <div>
     <em>Import React and useState -- export ListUser component function</em>
-    <code><pre>
-
+    <pre><code class=javascript>
 import React, { useState } from 'react'
 
-export default function ListUsers ({ users, createUser }) { }
-    </pre></code>
+export default function ListUsers ({ users, createUser }) {
+  return &lt;div />
+}
+    </code></pre>
   </div>
   <div>
     <em>Initialize the state variables</em>
-    <code><pre>
+    <pre><code class=javascript>
 const [name, setName] = useState('')
-    </pre></code>
-  </div>
-  <div>
-    <em>Make createNewUser function</em>
-    <code><pre>
-async function createNewUser() {
-  await createUser({ name })
-  setName('')
-}
-    </pre></code>
+    </code></pre>
   </div>
   <div>
     <em>List the names in USERS</em>
-    <code><pre>
+    <pre><code class=javascript>
 return (
   &lt;div>
     &lt;ul>
@@ -165,12 +154,12 @@ return (
     &lt;/ul>
   &lt;/div>
 )
-    </pre></code>
+    </code></pre>
   </div>
   <div>
     <em>Add the input to create a new 'user'</em>
-    <code><pre>
-<span class="bubblegum">return (
+    <pre><code class=javascript>
+return (
   &lt;div>
     &lt;ul>
       {users.map((user, i) =>
@@ -185,13 +174,22 @@ return (
       />
     &lt;/label>
     &lt;button onClick={createNewUser}>Save&lt;/button>
-  <span class="bubblegum">&lt;/div>
-)</span>
+  &lt;/div>
+)
     </pre></code>
   </div>
   <div>
+    <em>Make createNewUser function</em>
+    <pre><code class=javascript>
+async function createNewUser() {
+  await createUser({ name })
+  setName('')
+}
+    </code></pre>
+  </div>
+  <div>
     <em><u>src/app/pages/ListUsers.js</u></em>
-    <code><pre>
+    <pre><code class=javascript>
 import React, { useState } from 'react'
 
 export default function ListUsers ({ users, createUser }) {
@@ -221,38 +219,38 @@ export default function ListUsers ({ users, createUser }) {
     &lt;/div>
   )
 }
-    </pre></code>
+    </code></pre>
   </div>
-  <div><em>Modify existing file</em> <code><pre>src/app/AppShell.js</pre></code></div>
+  <div><em>Modify existing file</em> <pre><code class=javascript>src/app/AppShell.js</code></pre></div>
   <div>
     <em>Include our new component:</em>
-    <code><pre>import ListUsers from './pages/ListUsers'</pre></code>
+    <pre><code class=javascript>import ListUsers from './pages/ListUsers'</code></pre>
   </div>
   <div>
     <em>Create some temporary data:</em>
-    <code><pre>
+    <pre><code class=javascript>
 const USERS = [
   { name: 'John' },
   { name: 'Sally' }
 ]
-    </pre></code>
+    </code></pre>
   </div>
   <div>
     <em>Add a method to create a 'user'</em>
-    <code><pre>
-const createUser = user => USERS.push(user)
-    </pre></code>
+    <pre><code class=javascript>
+const createUser =
+  user => USERS.push(user)
+    </code></pre>
   </div>
   <div>
     <em>Render the ListUsers component, pass USERS to be displayed and the createUser method</em>
-    <code><pre>
+    <pre><code class=html>
 &lt;h1>Users List&lt;/h1>
 &lt;ListUsers
-  path='/'
   users={USERS}
   createUser={createUser}
 />
-    </pre></code>
+    </code></pre>
   </div>
   <div>
     <em><u>Check your work</u></em>
@@ -262,7 +260,7 @@ const createUser = user => USERS.push(user)
     </ul>
   </div>
   <div><em>Part 3:</em> graphql-hooks</div>
-  <div><em>graphql-hooks</em> is a module to connect react and graphQL or something like that</div>
+  <div><em>graphql-hooks</em> is a tiny hooks-first and super-fast GraphQL client</div>
   <div>
     <u><em>graphql-hooks</em></u>
     <ul>
@@ -271,15 +269,15 @@ const createUser = user => USERS.push(user)
       <li><code>npm run watch</code></li>
     </ul>
   </div>
-  <div><code><pre>npm install graphql-hooks --save</pre></code></div>
-  <div><em>Modify file</em> <code><pre>src/app/pages/ListUsers.js</pre></code></div>
+  <div><pre><code class=javascript>npm install graphql-hooks --save</code></pre></div>
+  <div><em>Modify file</em> <pre><code class=javascript>src/app/pages/ListUsers.js</code></pre></div>
   <div>
     <em>Import useQuery and useMutation from graphql-hooks</em>
-    <code><pre>import { useQuery, useMutation } from 'graphql-hooks'</pre></code>
+    <pre><code class=javascript>import { useQuery } from 'graphql-hooks'</code></pre>
   </div>
   <div>
     <em>Define a new Query</em>
-    <code><pre>
+    <pre><code class=javascript>
 const LIST_USERS_QUERY = `
   query ListUsersQuery {
     users {
@@ -287,11 +285,33 @@ const LIST_USERS_QUERY = `
     }
   }
 `
-    </pre></code>
+    </code></pre>
+  </div>
+  <div>
+    <em>Let's execute the query</em>
+    <pre><code class=javascript>
+const { data = { users } } =
+  useQuery(LIST_USERS_QUERY)
+    </code></pre>
+  </div>
+  <div>
+    <em>More details about the query</em>
+    <pre><code class=javascript>
+const {
+  data = { users: [] },
+  loading,
+  error,
+  refetch
+} = useQuery(LIST_USERS_QUERY)
+    </code></pre>
+  </div>
+  <div>
+    <em>useMutation</em>
+    <pre><code class=javascript>import { useQuery, useMutation } from 'graphql-hooks'</code></pre>
   </div>
   <div>
     <em>Define a new Mutation </em>
-    <code><pre>
+    <pre><code class=javascript>
 const CREATE_USER_MUTATION = `
   mutation CreateUser($name: String!) {
     createUser(name: $name) {
@@ -299,33 +319,27 @@ const CREATE_USER_MUTATION = `
     }
   }
 `
-    </pre></code>
+    </code></pre>
   </div>
   <div>
-    <em>Assign the Query</em>
-    <code><pre>
-const {
-  loading,
-  data = { users: [] },
-  error,
-  refetch: refetchUsers } = useQuery(LIST_USERS_QUERY)
-    </pre></code>
-  </div>
-  <div>
-    <em>Assign the Mutation </em>
-    <code><pre>
-const [createUser] = useMutation(CREATE_USER_MUTATION)
-    </pre></code>
+    <em>Assign the Mutation</em>
+    <pre><code class=javascript>
+const [createUser] =
+  useMutation(CREATE_USER_MUTATION)
+    </code></pre>
   </div>
   <div>
     <em>Update the createNewUser function</em>
-    <code><pre>
+    <pre><code class=javascript>
 async function createNewUser() {
-  await createUser({ variables: { name } })
+  await createUser({
+    variables: { name }
+  })
+
   setName('')
-  refetchUsers()
+  await refetchUsers()
 }
-    </pre></code>
+    </code></pre>
   </div>
   <div>
     <em>Add error handling, data.users, and unique key</em>
@@ -342,7 +356,7 @@ async function createNewUser() {
         &lt;/div>
       }
 
-      if (!loading && !error && data.users) {
+      if (data.users) {
         return (
           &lt;div>
             &lt;ul>
@@ -350,9 +364,9 @@ async function createNewUser() {
                 {user.name}
               &lt;/li>)}
             &lt;/ul> ...
-    </pre></code>
+    </code></pre>
   </div>
-  <div><em>Modify file</em> <code><pre>src/client/js/app-shell.js</pre></code></div>
+  <div><em>Modify file</em> <pre><code class=javascript>src/client/js/app-shell.js</code></pre></div>
   <div><em>Part 4:</em> Caching</div>
   <div>
     <u><em>Caching</em></u>
@@ -388,8 +402,7 @@ async function createNewUser() {
       Thanks
     </div>
     <div style="font-size: 0.2em">
-      <em>@</em>mafintosh
-      <em>@</em>matteocollina
+      <em>@</em>...
     </div>
   </div>
   <div>

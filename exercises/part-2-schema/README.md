@@ -55,5 +55,5 @@
   <...>
 
   <h1>Users List</h1>
-  <ListUsers path='/' users={USERS} createUser={createUser} />
+  <ListUsers users={USERS} createUser={createUser} />
   ```
