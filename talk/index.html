@@ -39,22 +39,28 @@
     <img src='./nearform.svg' width='100'>
   </div>
   <div>
-    Graph<span class="bubblegum">QL</span> is a new language for interacting with <em>web servers</em>
+    Graph<span class="bubblegum">QL</span> is a data query language <em>for API</em>
   </div>
   <div>
-    Graph<span class="bubblegum">QL</span> is a new way to <em>interact with REST endpoints</em>
-  </div>
-  <div>
-    Graph<span class="bubblegum">QL</span> has a <em>rich ecosystem</em>
-  </div>
-  <div>
-    Tons of <em>tooling</em>, modules, even graphical query editors
-  </div>
-  <div>
-    You may be familiar with frameworks such as <em>Apollo</em> and <em>Relay</em>
+    Graph<span class="bubblegum">QL</span>
+    <ul>
+      <li>Strongly typed query language is self-documenting</li>
+      <li>Declarative language expressing data requirements</li>
+      <li>Lighter and faster responses without roundtrips</li>
+      <li>Single endpoint to do all the things</li>
+    </ul>
   </div>
   <div>
     What about <em>React?</em>
+  </div>
+  <div>
+    What is <em>React Hooks?</em>
+  </div>
+  <div>
+    <h1>React Hooks</h1>
+    <ul>
+      <li>Hooks allow to reuse stateful logic between components</li>
+    </ul>
   </div>
   <div>
     Introducing <em>graphql-hooks</em> for React!
@@ -67,7 +73,7 @@
       <code>git clone git@github.com:nearform/graphql-hooks-workshop.git</code></li>
     </ul>
   </div>
-  <div><em>Part 1:</em> Hello World</div>
+  <div><em>Part 1:</em> Hello world</div>
   <div>
     <ul>
       <li>Node.js</li>
@@ -110,11 +116,11 @@
   <div>
     <em>QUERY</em>
     <pre><code>
-        {
-          users {
-            name
-          }
-        }
+{
+  users {
+    name
+  }
+}
     </code></pre>
   </div>
   <div><em>Part 2:</em> Graph<span class="bubblegum">QL</span> Skeleton</div>
@@ -130,13 +136,9 @@
   </div>
   <div><em>Create a new file</em> <code class=javascript><pre>src/app/pages/ListUsers.js</pre></code></div>
   <div>
-    <em>
-      <ul>
-        <li>Import React and useState</li>
-        <li>Export and define the 'ListUser' component function</li>
-      </ul>
-    </em>
+    <em>ListUsers functional component</em>
     <pre><code class=javascript>
+# /src/app/pages/ListUsers.js
 import React, { useState } from 'react'
 
 export default function ListUsers ({ users, createUser }) {
@@ -145,43 +147,23 @@ export default function ListUsers ({ users, createUser }) {
     </code></pre>
   </div>
   <div>
-    <em>Initialize the state variables</em>
+    <em>Simple single state hook</em>
     <pre><code class=javascript>
 const [name, setName] = useState('')
     </code></pre>
   </div>
   <div>
-    <em>List the names in USERS</em>
+    <em>Input to update name state</em>
     <pre><code class=javascript>
 return (
   &lt;div>
-    &lt;ul>
-      {users.map((user, i) =>
-        &lt;li key={i}>{user.name}&lt;/li>
-      )}
-    &lt;/ul>
-  &lt;/div>
-)
-    </code></pre>
-  </div>
-  <div>
-    <em>Add the input to create a new 'user'</em>
-    <pre><code class=javascript>
-return (
-  &lt;div>
-    &lt;ul>
-      {users.map((user, i) =>
-        &lt;li key={i}>{user.name}&lt;/li>
-      )}
-    &lt;/ul></span>
-     &lt;label>Name:
-      &lt;input
-        type='text'
-        onChange={e => setName(e.target.value)}
-        value={name}
-      />
+    &lt;label>Name:
+    &lt;input
+      type='text'
+      onChange={e => setName(e.target.value)}
+      value={name}
+    />
     &lt;/label>
-    &lt;button onClick={createNewUser}>Save&lt;/button>
   &lt;/div>
 )
     </pre></code>
@@ -196,37 +178,35 @@ async function createNewUser() {
     </code></pre>
   </div>
   <div>
-    <em><u>src/app/pages/ListUsers.js</u></em>
-    <pre><code class=javascript>
-import React, { useState } from 'react'
+      <em>Glue things together</em>
+      <pre><code class=javascript>
+const [name, setName] = useState('')
 
-export default function ListUsers ({ users, createUser }) {
-
-  const [name, setName] = useState('')
-
-  async function createNewUser() {
-    await createUser({ name })
-    setName('')
-  }
-
-  return (
-    &lt;div>
-      &lt;ul>
-        {users.map((user, i) =>
-          &lt;li key={i}>{user.name}&lt;/li>
-        )}
-      &lt;/ul>
-      &lt;label>Name:
-        &lt;input
-          type='text'
-          onChange={e => setName(e.target.value)}
-          value={name}
-        />
-      &lt;/label>
-      &lt;button onClick={createNewUser}>Save&lt;/button>
-    &lt;/div>
-  )
+async function createNewUser() {
+  &lt;...&gt;
 }
+
+return &lt;div>
+  &lt;input
+    onChange={e => setName(e.target.value)}
+    value={name}
+  />
+  &lt;button onClick={createNewUser}>Save&lt;/button>
+&lt;/div>
+      </code></pre>
+    </div>
+  <div>
+    <em>List the names in USERS</em>
+    <pre><code class=javascript>
+return (
+  &lt;div>
+    &lt;ul>
+      {users.map((user, i) =>
+        &lt;li key={i}>{user.name}&lt;/li>
+      )}
+    &lt;/ul>
+  &lt;/div>
+)
     </code></pre>
   </div>
   <div><em>Modify existing file</em> <code class=javascript><pre>src/app/AppShell.js</pre></code></div>
@@ -284,7 +264,26 @@ const createUser =
       <li><code>npm run watch</code></li>
     </ul>
   </div>
+  
   <div><code class=javascript><pre>npm install graphql-hooks --save</pre></code></div>
+  <div>
+    <em>Let's prepare the GraphQL Client</em>
+    <pre><code class=javascript>
+# src/client/js/app-shell.js
+const {
+  GraphQLClient,
+  ClientContext
+} = require('graphql-hooks')
+
+const client = new GraphQLClient({
+  url: '/graphql'
+})
+
+return &lt;ClientContext.Provider value={client}>
+  &lt;AppShell />
+&lt;/ClientContext.Provider>
+    </code></pre>
+  </div>
   <div><em>Modify existing file</em> <code class=javascript><pre>src/app/pages/ListUsers.js</pre></code></div>
   <div>
     <em>Import 'useQuery' from graphql-hooks</em>
@@ -487,24 +486,32 @@ const client = new GraphQLClient({
   </div>
   <div>
     <em>Import 'useManualQuery' from graphql-hooks</em>
-    <pre><code class=javascript>import { useQuery, useMutation, useManualQuery } from 'graphql-hooks'</code></pre>
+    <pre><code class=javascript>
+import { useQuery,
+  useMutation,
+  useManualQuery
+} from 'graphql-hooks'
+    </code></pre>
   </div>
   <div>
     <em>Define a new Manual Query</em>
     <pre><code class=javascript>
 const GET_FIRST_USER_QUERY = `
-    query FirstUser {
-      firstUser {
-        name
-      }
+  query FirstUser {
+    firstUser {
+      name
     }
-  `
+  }
+`
     </code></pre>
   </div>
   <div>
     <em>Create a function to trigger with a button</em>
     <pre><code class=javascript>
-const [getFirstUser, { data: firstUserData }] = useManualQuery(
+const [
+  getFirstUser,
+  { data: firstUserData }
+] = useManualQuery(
   GET_FIRST_USER_QUERY
 )
     </code></pre>
@@ -523,8 +530,7 @@ const [getFirstUser, { data: firstUserData }] = useManualQuery(
   <div>
     <em>
       <ul>
-        <li>Import React</li>
-        <li>Export and define the 'TestPage' component</li>
+        <li>ListUsers Component</li>
       </ul>
     </em>
     <pre><code class=javascript>
@@ -534,7 +540,7 @@ export default function TestPage() {
 
   return (
     &lt;div>
-      &lt;br />Return Home to test if data is cached without querying
+      Return Home to test if data is cached without querying
     &lt;/div>
   )
 }
