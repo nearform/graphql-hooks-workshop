@@ -15,23 +15,6 @@ const schema = `
     createUser(name: String!): User
   }`
 
-
-const resolvers = {
-  Query: {
-    users: (_, { skip = 0, limit }) => {
-      const end = limit ? skip + limit : undefined
-      return users.slice(skip, end)
-    },
-    firstUser: () => users[0]
-  },
-  Mutation: {
-    createUser: (_, user) => {
-      users.push(user)
-      return user
-    }
-  }
-}
-
 const users = [
   {
     name: 'Brian'
@@ -47,6 +30,20 @@ const users = [
   }
 ]
 
+const resolvers = {
+  Query: {
+    users() {
+      return users
+    }
+  },
+  Mutation: {
+    createUser(_, user) {
+      users.push(user)
+      return user
+    }
+  }
+}
+
 function registerGraphQL(fastify, opts, next) {
   fastify.register(fastifyGQL, {
     schema,
@@ -56,7 +53,5 @@ function registerGraphQL(fastify, opts, next) {
 
   next()
 }
-
-registerGraphQL[Symbol.for('skip-override')] = true
 
 module.exports = registerGraphQL

@@ -32,7 +32,7 @@ const schema = `
 
 const resolvers = {
   Query: {
-    users: (_, { skip = 0, limit }) => {
+    users: (_, { skip = 0, limit = 5 }) => {
       const end = limit ? skip + limit : undefined
       return users.slice(skip, end)
     },
