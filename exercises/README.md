@@ -2,27 +2,54 @@
 
 ## Introduction
 
-- What is graphQL
-- Back story
+- What are React-Hooks?
+- What is GraphQL?
 - Ask if anyone has used Apollo / Relay
+- Introducing GraphQL-Hooks!
 
-## [Part 1 - hello world (graphql/fastify/react)](https://github.com/nearform/graphql-hooks-workshop/tree/master/part-1-hello-world)
+## [Part 1 - Hello World](https://github.com/nearform/graphql-hooks-workshop/tree/master/exercises/part-1-hello-world)
 
-- Set up a GraphQL server (clone repo, go to folder 1, part-1-hello-world)
-- `npm install`
-- `npm run watch`
-- view site in browser: [http://localhost:3000](localhost:3000)
-- Fix any issues with people
-- install graphiQL - to view data (separate viewing)
-- Visit graphQL endpoint and demonstrate
+- Goals
+  - Get a GraphQL Server up and running
+  - Explore GraphiQL
+- Stack
+  - Node.js
+  - Fastify
+  - React
+  - GraphQL
+- Hello World Setup
+  - change directory to `part-1-hello-world`
+  - `npm install`
+  - `npm run watch`
+  - http://localhost:3000
+- In the browser
+  - Navigate to the 'List Users' Page
+  - This is just a Skeleton
+  - It is not connected to GraphQL... yet
+- Look at `src/server/graphql.js`
+  - fastify-gql module
+  - schema
+  - resolvers
+  - `graphiql: true`
+- GraphiQL
+  - an in-browser IDE for exploring GraphQL
+  - http://localhost:3000/graphiql.html
+  - Try running a query
+    ```
+      {
+        users {
+          name
+        }
+      }
+    ```
 
-## [Part 2 - graphQL schema for connecting with `graphql-hooks`](https://github.com/nearform/graphql-hooks-workshop/tree/master/part-2-schema)
+## [Part 2 - GraphQL Schema for connecting with `graphql-hooks`](https://github.com/nearform/graphql-hooks-workshop/tree/master/exercises/part-2-schema)
 
 - Describe what we’re trying to build
 - List of ‘post’ and a form that creates a new one
 - create dummy data ?
 
-## [Part 3 - graphQL-hooks](https://github.com/nearform/graphql-hooks-workshop/tree/master/part-3-hooks)
+## [Part 3 - graphQL-hooks](https://github.com/nearform/graphql-hooks-workshop/tree/master/exercises/part-3-hooks)
 
 - Describe what GraphQL-hooks does
 - npm i graphql-hooks
@@ -34,7 +61,7 @@
 - useMutation for the form -> move to a later step...
 - Verify that both work / fix people issues
 
-## [Part 4 - graphQL-hooks-memcache](https://github.com/nearform/graphql-hooks-workshop/tree/master/part-4-caching)
+## [Part 4 - graphQL-hooks-memcache](https://github.com/nearform/graphql-hooks-workshop/tree/master/exercises/part-4-caching)
 
 - Caching
 - `npm i graphql-hooks-memcache`
@@ -43,7 +70,7 @@
 - Store it in a simple k/v store
 - Demonstrate the caching works
 
-## [Part 5 - graphQL-hooks-ssr](https://github.com/nearform/graphql-hooks-workshop/tree/master/part-5-ssr)
+## [Part 5 - graphQL-hooks-ssr](https://github.com/nearform/graphql-hooks-workshop/tree/master/exercises/part-5-ssr)
 
 - SSR
 - Npm i graphql-hooks-ssr
@@ -55,7 +82,7 @@
 - Update the code & demonstrate it works
 
 
-## [Part 6 - graphQL pagination](https://github.com/nearform/graphql-hooks-workshop/tree/master/part-6-pagination)
+## [Part 6 - graphQL pagination](https://github.com/nearform/graphql-hooks-workshop/tree/master/exercises/part-6-pagination)
 
 - Pagination
 - 2 types, page based or infinite scrolling

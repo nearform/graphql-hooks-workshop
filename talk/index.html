@@ -39,36 +39,42 @@
     <img src='./nearform.svg' width='100'>
   </div>
   <div>
-    Graph<span class="bubblegum">QL</span> is a new language for interacting with <em>web servers</em>
+    <span class="bubblegum">react-hooks</span> are...</em>
   </div>
   <div>
-    Graph<span class="bubblegum">QL</span> is a new way to <em>interact with REST endpoints</em>
+    Graph<span class="bubblegum">QL</span> is a data query language <em>for API</em>
   </div>
   <div>
-    Graph<span class="bubblegum">QL</span> has a <em>rich ecosystem</em>
+    Graph<span class="bubblegum">QL</span>
+    <ul>
+      <li>Strongly typed query language is self-documenting</li>
+      <li>Declarative language expressing data requirements</li>
+      <li>Lighter and faster responses without roundtrips</li>
+      <li>Single endpoint to do all the things</li>
+    </ul>
   </div>
   <div>
-    Tons of <em>tooling</em>, modules, even graphical query editors
+    Introducing <em>graphql-hooks!</em>
   </div>
-  <div>
-    You may be familiar with frameworks such as <em>Apollo</em> and <em>Relay</em>
-  </div>
-  <div>
-    What about <em>React?</em>
-  </div>
-  <div>
-    Introducing <em>graphql-hooks</em> for React!
-  </div>
+  <div><em>graphql-hooks</em> is a tiny hooks-first and super-fast Graph<span class="bubblegum">QL</span> client</div>
   <div>
     <u><em>Setup</em></u>
     <ul>
       <li>Node v10.16.0</li>
-      <li>clone github repository<br />
-      <code>git clone git@github.com:nearform/graphql-hooks-workshop.git</code></li>
+      <li>clone github repository</li>
     </ul>
   </div>
+  <div><code><pre>git clone git@github.com:nearform/graphql-hooks-workshop.git</pre></code></div>
   <div><em>Part 1:</em> Hello World</div>
   <div>
+    <em><u>Goals</u></em>
+    <ul>
+      <li>Get a Graph<span class="bubblegum">QL</span> Server up and running</li>
+      <li>Explore <span class="bubblegum">Graph</span><i>i</i><em>QL</em></li>
+    </ul>
+  </div>
+  <div>
+    <em><u>Stack</u></em>
     <ul>
       <li>Node.js</li>
       <li>Fastify</li>
@@ -77,24 +83,28 @@
     </ul>
   </div>
   <div>
-    <u><em>Hello World</em></u>
+    <u><em>Hello World Setup</em></u>
     <ul>
       <li><code>cd graphql-hooks-workshop/exercises/part-1-hello-world/</code></li>
       <li><code>npm install</code></li>
       <li><code>npm run watch</code></li>
+      <li><span class="bubblegum">http://localhost:3000</span></li>
     </ul>
   </div>
   <div>
-    <span class="bubblegum">http://localhost:3000</span>
+    <ul>
+      <li>Navigate to the <em>List Users</em> page</li>
+      <li>This is just a skeleton</li>
+      <li>It is not connected to Graph<span class="bubblegum">QL</span>... yet</li>
+    </ul>
   </div>
-  <div>Any <span class="bubblegum">issues?</span></div>
   <div>
-    Anatomy of <em><code>src/graphql.js</code></em>
+    Look at <em><code>src/server/graphql.js</code></em>
     <ul>
       <li><span class="bubblegum">fastify-gql</span> module</li>
       <li>schema</li>
       <li>resolvers</li>
-      <li>data</li>
+      <li><em><code>graphiql: <span class="bubblegum">true</span></code></em></li>
     </ul>
   </div>
   <div><span class="bubblegum">graph</span><i>i</i><em>QL</em></div>
@@ -108,7 +118,7 @@
     </span>
   </div>
   <div>
-    <em>QUERY</em>
+    <em>RUN THIS QUERY</em>
     <pre><code>
         {
           users {
@@ -117,165 +127,105 @@
         }
     </code></pre>
   </div>
-  <div><em>Part 2:</em> Graph<span class="bubblegum">QL</span> Skeleton</div>
-  <div><em>Goal 1:</em> Display List of 'users'</div>
-  <div><em>Goal 2:</em> Create a new 'user'</div>
+  <div><em>Part 2:</em> Graph<span class="bubblegum">QL</span> Schema</div>
   <div>
-    <u>Graph<span class="bubblegum">QL</span> Skeleton</u>
+    <em><u>Goals</u></em>
     <ul>
-      <li><code>cd graphql-hooks-workshop/exercises/part-2-skeleton/</code></li>
-      <li><code>npm install</code></li>
-      <li><code>npm run watch</code></li>
+      <li>Update the Graph<span class="bubblegum">QL</span> schema to <em>Create a User</em></li>
+      <li>Test it with <span class="bubblegum">Graph</span><i>i</i><em>QL</em></li>
     </ul>
   </div>
-  <div><em>Create a new file</em> <code class=javascript><pre>src/app/pages/ListUsers.js</pre></code></div>
   <div>
-    <em>
-      <ul>
-        <li>Import React and useState</li>
-        <li>Export and define the 'ListUser' component function</li>
-      </ul>
-    </em>
-    <pre><code class=javascript>
-import React, { useState } from 'react'
-
-export default function ListUsers ({ users, createUser }) {
-  return &lt;div />
-}
-    </code></pre>
-  </div>
-  <div>
-    <em>Initialize the state variables</em>
-    <pre><code class=javascript>
-const [name, setName] = useState('')
-    </code></pre>
-  </div>
-  <div>
-    <em>List the names in USERS</em>
-    <pre><code class=javascript>
-return (
-  &lt;div>
-    &lt;ul>
-      {users.map((user, i) =>
-        &lt;li key={i}>{user.name}&lt;/li>
-      )}
-    &lt;/ul>
-  &lt;/div>
-)
-    </code></pre>
-  </div>
-  <div>
-    <em>Add the input to create a new 'user'</em>
-    <pre><code class=javascript>
-return (
-  &lt;div>
-    &lt;ul>
-      {users.map((user, i) =>
-        &lt;li key={i}>{user.name}&lt;/li>
-      )}
-    &lt;/ul></span>
-     &lt;label>Name:
-      &lt;input
-        type='text'
-        onChange={e => setName(e.target.value)}
-        value={name}
-      />
-    &lt;/label>
-    &lt;button onClick={createNewUser}>Save&lt;/button>
-  &lt;/div>
-)
-    </pre></code>
-  </div>
-  <div>
-    <em>Make 'createNewUser' function</em>
-    <pre><code class=javascript>
-async function createNewUser() {
-  await createUser({ name })
-  setName('')
-}
-    </code></pre>
-  </div>
-  <div>
-    <em><u>src/app/pages/ListUsers.js</u></em>
-    <pre><code class=javascript>
-import React, { useState } from 'react'
-
-export default function ListUsers ({ users, createUser }) {
-
-  const [name, setName] = useState('')
-
-  async function createNewUser() {
-    await createUser({ name })
-    setName('')
-  }
-
-  return (
-    &lt;div>
-      &lt;ul>
-        {users.map((user, i) =>
-          &lt;li key={i}>{user.name}&lt;/li>
-        )}
-      &lt;/ul>
-      &lt;label>Name:
-        &lt;input
-          type='text'
-          onChange={e => setName(e.target.value)}
-          value={name}
-        />
-      &lt;/label>
-      &lt;button onClick={createNewUser}>Save&lt;/button>
-    &lt;/div>
-  )
-}
-    </code></pre>
-  </div>
-  <div><em>Modify existing file</em> <code class=javascript><pre>src/app/AppShell.js</pre></code></div>
-  <div>
-    <em>Include our new component:</em>
-    <pre><code class=javascript>import ListUsers from './pages/ListUsers'</code></pre>
-  </div>
-  <div>
-    <em>Create some temporary data:</em>
-    <pre><code class=javascript>
-const USERS = [
-  { name: 'John' },
-  { name: 'Sally' }
-]
-    </code></pre>
-  </div>
-  <div>
-    <em>Add a method to create a 'user'</em>
-    <pre><code class=javascript>
-const createUser =
-  user => USERS.push(user)
-    </code></pre>
-  </div>
-  <div>
-    <em>
-      <ul>
-        <li>Render the 'ListUsers' component</li>
-        <li>Pass 'USERS' list to be displayed</li>
-        <li>Pass 'createUser' method to child component</li>
-      </ul>
-    </em>
-    <pre><code class=html>
-&lt;h1>Users List&lt;/h1>
-&lt;ListUsers
-  users={USERS}
-  createUser={createUser}
-/>
-    </code></pre>
-  </div>
-  <div>
-    <em><u>Check your work</u></em>
+    <u>Graph<span class="bubblegum">QL</span> <em>Schema Setup</em></u>
     <ul>
+      <li><code>cd graphql-hooks-workshop/exercises/part-2-schema/</code></li>
+      <li><code>npm install</code></li>
       <li><code>npm run watch</code></li>
       <li><span class="bubblegum">http://localhost:3000</span></li>
     </ul>
   </div>
-  <div>Any <span class="bubblegum">issues?</span></div>
+  <div><em>Modify existing file</em> <code class=javascript><pre>src/server/graphql.js</pre></code></div>
+  <div>A Graph<span class="bubblegum">QL</span> schema defines the <em>relationships</em> and <em>structure</em> of the data
+  </div>
+  <div>In the current <em>schema</em>, <span class="bubblegum">Query</span> is the <em>entry point</em>
+    that provides the type <span class="bubblegum">User</span>
+    <pre><code>
+const schema = `
+  type User {
+    name: String
+  }
+
+  type Query {
+    users: [User]
+  }
+`
+</code></pre>
+  </div>
+  <div>Graph<span class="bubblegum">QL</span> <em>resolvers</em> are functions that define what to do with the data
+  </div>
+  <div>In the current <em>resolver</em>,
+    <span class="bubblegum">Query</span> defines what to do with the <em>schema</em>, in this case, it simply fetches all of the <span class="bubblegum">users</span>
+    </ul>
+    <pre><code>
+const resolvers = {
+  Query: {
+    users() {
+      return users
+    }
+  }
+}
+</code></pre>
+  </div>
+  <div>Generally, in Graph<span class="bubblegum">QL</span>
+    <ul>
+      <li><em>Queries</em> are for <span class="bubblegum">fetching</span></li>
+      <li><em>Mutations</em> are for <span class="bubblegum">writing</span></li>
+    </ul>
+  </div>
+  <div>To <em>Create a User</em>,
+    add a <span class="bubblegum">mutation</span> to the <em>schema</em> and <em>resolvers</em> in <code>graphql.js</code>
+  </div>
+  <div>
+    <pre><code>
+const schema = `
+  type User {
+    name: String
+  }
+
+  type Query {
+    users: [User]
+  }
+
+  type Mutation {
+    createUser(name: String!): User
+  }
+`
+</code></pre>
+  </div>
+  <div>
+    <pre><code>
+const resolvers = {
+  Query: {
+    users() {
+      return users
+    }
+  },
+  Mutation: {
+    createUser: (_, user) => {
+      users.push(user)
+      return user
+    }
+  }
+}
+</code></pre>
+  </div>
   <div><em>Part 3:</em> graphql-hooks</div>
-  <div><em>graphql-hooks</em> is a tiny hooks-first and super-fast Graph<span class="bubblegum">QL</span> client</div>
+  <div>
+    <em><u>Goals</u></em>
+    <ul>
+      <li></li>
+    </ul>
+  </div>
   <div>
     <u><em>graphql-hooks</em></u>
     <ul>
@@ -421,6 +371,12 @@ const App = (
   </div>
   <div>Any <span class="bubblegum">issues?</span></div>
   <div><em>Part 4:</em> Caching</div>
+  <div>
+    <em><u>Goals</u></em>
+    <ul>
+      <li></li>
+    </ul>
+  </div>
   <div>
     <em>refetch</em> no more
   </div>
@@ -595,6 +551,12 @@ import NotFoundPage from './pages/NotFoundPage'
   <div>Any <span class="bubblegum">issues?</span></div>
   <div><em>Part 5:</em> <span class="bubblegum">S</span>erver <span class="bubblegum">S</span>ide <span class="bubblegum">R</span>endering</div>
   <div>
+    <em><u>Goals</u></em>
+    <ul>
+      <li></li>
+    </ul>
+  </div>
+  <div>
     <ul>
       <li>Finds all instances of <code>useQuery</code> and resolves them</li>
       <li>Re-renders all queries</li>
@@ -691,6 +653,12 @@ async function renderScripts({ initialState }) {
   </div>
   <div>Any <span class="bubblegum">issues?</span></div>
   <div><em>Part 6:</em> Pagination</div>
+  <div>
+    <em><u>Goals</u></em>
+    <ul>
+      <li></li>
+    </ul>
+  </div>
   <div><span class="bubblegum">graphql-hooks</span> does page-based <em>pagination</em> and infinite scrolling</div>
   <div>Let's implement page-based <em>pagination</em></div>
   <div>

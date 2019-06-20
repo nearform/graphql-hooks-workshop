@@ -1,5 +1,20 @@
 const fastifyGQL = require('fastify-gql')
 
+const users = [
+  {
+    name: 'Brian'
+  },
+  {
+    name: 'Jack'
+  },
+  {
+    name: 'Joe'
+  },
+  {
+    name: 'Kristin'
+  }
+]
+
 const schema = `
   type User {
     name: String
@@ -8,7 +23,6 @@ const schema = `
   type Query {
     users(skip: Int, limit: Int): [User]
     firstUser: User
-    hello(name: String): String
   }
 
   type Mutation {
@@ -32,21 +46,6 @@ const resolvers = {
   }
 }
 
-const users = [
-  {
-    name: 'Brian'
-  },
-  {
-    name: 'Jack'
-  },
-  {
-    name: 'Joe'
-  },
-  {
-    name: 'Kristin'
-  }
-]
-
 function registerGraphQL(fastify, opts, next) {
   fastify.register(fastifyGQL, {
     schema,
@@ -56,7 +55,5 @@ function registerGraphQL(fastify, opts, next) {
 
   next()
 }
-
-registerGraphQL[Symbol.for('skip-override')] = true
 
 module.exports = registerGraphQL

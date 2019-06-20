@@ -17,6 +17,7 @@ module.exports = () => {
   })
 
   app.register(graphqlPlugin)
+
   app.get('/', appShellHandler)
 
   app.listen(3000)
