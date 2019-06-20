@@ -1,28 +1,34 @@
 # Part 1 - hello world
-- We will run:
-  - node.js
-  - fastify
-  - react
-  - graphQL
-- Set up a GraphQL server
-  - clone repo
-  `git clone git@github.com:nearform/graphql-hooks-workshop.git`
+- Goals
+  - Get a GraphQL Server up and running
+  - Explore GraphiQL
+- Stack
+  - Node.js
+  - Fastify
+  - React
+  - GraphQL
+- Hello World Setup
   - change directory to `part-1-hello-world`
   - `npm install`
   - `npm run watch`
-- View site in browser: http://localhost:3000
-- Fix installation issues
-- Look at `src/graphql.js`
-  - fastify-gql
+  - http://localhost:3000
+- In the browser
+  - Navigate to the 'List Users' Page
+  - This is just a Skeleton
+  - It is not connected to GraphQL... yet
+- Look at `src/server/graphql.js`
+  - fastify-gql module
   - schema
   - resolvers
-  - data
-- View GraphiQL interface http://localhost:3000/graphiql.html
-- Try running a query
-  ```
-    {
-      users {
-        name
+  - `graphiql: true`
+- GraphiQL
+  - an in-browser IDE for exploring GraphQL
+  - http://localhost:3000/graphiql.html
+  - Try running a query
+    ```
+      {
+        users {
+          name
+        }
       }
-    }
     ```
