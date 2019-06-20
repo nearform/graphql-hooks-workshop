@@ -219,6 +219,25 @@ const resolvers = {
 }
 </code></pre>
   </div>
+  <div>Try the <em>Create a User</em> mutation in <span class="bubblegum">graph</span><i>i</i><em>QL</em>
+    <span class="bubblegum">
+      http://localhost:3000/graphiql.html
+    </span>
+  </div>
+  <div><pre><code>
+mutation CreateUser($name: String!){
+  createUser(name: $name) {
+    name
+  }
+}
+  </code></pre>
+  </div>
+  <div>Don't forget to add Query Variables<pre><code>
+{
+  "name": "bob"
+}
+  </code></pre>
+  </div>
   <div><em>Part 3:</em> graphql-hooks</div>
   <div>
     <em><u>Goals</u></em>
