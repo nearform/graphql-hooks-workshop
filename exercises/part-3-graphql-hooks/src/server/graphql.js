@@ -1,6 +1,6 @@
 const fastifyGQL = require('fastify-gql')
 
-const users = [
+const userList = [
   {
     name: 'Brian'
   },
@@ -32,12 +32,12 @@ const schema = `
 const resolvers = {
   Query: {
     users() {
-      return users
+      return userList
     }
   },
   Mutation: {
-    createUser: (_, user) => {
-      users.push(user)
+    createUser(_, user) {
+      userList.push(user)
       return user
     }
   }

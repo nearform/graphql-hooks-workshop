@@ -10,7 +10,6 @@ export default function ListUsers() {
   const [name, setName] = useState('')
 
   function createNewUser() {
-
     users.push({name})
     setName('')
   }

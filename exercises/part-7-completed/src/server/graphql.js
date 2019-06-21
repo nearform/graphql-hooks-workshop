@@ -1,38 +1,6 @@
 const fastifyGQL = require('fastify-gql')
 
-const schema = `
-  type User {
-    name: String
-  }
-
-  type Query {
-    users(skip: Int, limit: Int): [User]
-    firstUser: User
-    hello(name: String): String
-  }
-
-  type Mutation {
-    createUser(name: String!): User
-  }`
-
-
-const resolvers = {
-  Query: {
-    users: (_, { skip = 0, limit = 5 }) => {
-      const end = limit ? skip + limit : undefined
-      return users.slice(skip, end)
-    },
-    firstUser: () => users[0]
-  },
-  Mutation: {
-    createUser: (_, user) => {
-      users.push(user)
-      return user
-    }
-  }
-}
-
-const users = [
+const userList = [
   {
     name: 'Brian'
   },
@@ -46,6 +14,36 @@ const users = [
     name: 'Kristin'
   }
 ]
+
+const schema = `
+  type User {
+    name: String
+  }
+
+  type Query {
+    users(skip: Int, limit: Int): [User]
+  }
+
+  type Mutation {
+    createUser(name: String!): User
+  }
+`
+
+const resolvers = {
+  Query: {
+    users (_, { skip = 0, limit }) {
+      return limit ?
+        userList.slice(skip, skip + limit) :
+        userList.slice(skip)
+    }
+  },
+  Mutation: {
+    createUser: (_, user) => {
+      userList.push(user)
+      return user
+    }
+  }
+}
 
 function registerGraphQL(fastify, opts, next) {
   fastify.register(fastifyGQL, {
