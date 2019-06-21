@@ -20,6 +20,7 @@ module.exports = () => {
 
   app.get('/', appShellHandler)
   app.get('/listUsers', appShellHandler)
+  app.get('/users', appShellHandler)
 
   app.listen(3000)
 }

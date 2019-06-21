@@ -1,6 +1,6 @@
 const fastifyGQL = require('fastify-gql')
 
-const users = [
+const userList = [
   {
     name: 'Brian'
   },
@@ -28,17 +28,17 @@ const schema = `
     createUser(name: String!): User
   }`
 
-
 const resolvers = {
   Query: {
-    users: (_, { skip = 0, limit = 5 }) => {
-      const end = limit ? skip + limit : undefined
-      return users.slice(skip, end)
+    users (_, { skip = 0, limit }) {
+      return limit ?
+        userList.slice(skip, skip + limit) :
+        userList.slice(skip)
     }
   },
   Mutation: {
-    createUser: (_, user) => {
-      users.push(user)
+    createUser(_, user) {
+      userList.push(user)
       return user
     }
   }

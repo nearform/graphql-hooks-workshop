@@ -37,11 +37,11 @@ export default function ListUsers () {
 
   return (
     <div>
-      <h1>Users List</h1>
+      <h2>Users List</h2>
       <ul>
-        {data.users.map((user, i) =>
-          <li key={i}>{user.name}</li>
-        )}
+        {data.users.map((user, i) => <li key={i}>
+          {user.name}
+        </li>)}
       </ul>
       <label>Create User<br />
         <input
