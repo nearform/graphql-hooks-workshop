@@ -337,7 +337,8 @@ const App = (
     <em>Modify <code>src/app/pages/ListUsers.js</code></em><br /><br />
     <div>Query GraphQL</div>
     <pre><code class=javascript>
-import { useQuery } from 'graphql-hooks'
+import { useQuery, useMutation } from 'graphql-hooks'
+
 const LIST_USERS_QUERY = `
   query ListUsersQuery {
     users {
@@ -345,13 +346,32 @@ const LIST_USERS_QUERY = `
     }
   }
 `
+const CREATE_USER_MUTATION = `
+  mutation CreateUser($name: String!) {
+    createUser(name: $name) {
+      name
+    }
+  }
+`
+    </code></pre>
+  </div>
+  <div>
+    <em>Modify <code>src/app/pages/ListUsers.js</code></em><br /><br />
+    <div>Add the hooks</div>
+    <pre><code class=javascript>
+const {
+  loading,
+  error,
+  data = { users: [] },
+  refetch: refetchUsers
+} = useQuery(LIST_USERS_QUERY)
 
-const { loading, error, data } = useQuery(QUERY)
+const [createUser] = useMutation(CREATE_USER_MUTATION)
     </code></pre>
   </div>
   <div>
     <em>Hook details</em>
-    <pre><code class=javascript>
+    <code class=javascript><pre>
 const {
   loading,        // Boolean, is it completed?
   error,          // Boolean, was it successful?
@@ -366,11 +386,19 @@ const {
   useCache,       // Boolean, OK to lookup the cache first?
   skipCache       // Boolean, tore the response in cache?
 })
-    </code></pre>
+    </pre></code>
   </div>
-  <div>Next <span class="bubblegum">an exercise</span></div>
   <div>
-    <div>Coding...</div>
+    <em>Modify <code>src/app/pages/ListUsers.js</code></em><br /><br />
+    <div>Update createNewUser function</div>
+    <pre><code class=javascript>
+async function createNewUser() {
+  await createUser({ variables: { name } })
+  setName('')
+  refetchUsers()
+}
+</code></pre>
+    <div>Can delete the old <em>users</em> data</div>
   </div>
   <div><em>Part 4:</em> Query Variables</div>
   <div>

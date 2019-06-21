@@ -1,5 +1,9 @@
 # Part 3 - graphql-hooks
 
+- Goals
+  - See graphql-hooks in action
+  - Connect the back-end data to the front-end webpage
+
 - Describe what graphql-hooks does
 - `npm install graphql-hooks --save`
 - Update the front-end to use ClientProvider

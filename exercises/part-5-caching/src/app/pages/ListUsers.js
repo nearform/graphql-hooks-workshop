@@ -20,7 +20,12 @@ export default function ListUsers () {
 
   const [name, setName] = useState('')
 
-  const { loading, data = { users: [] }, error, refetch: refetchUsers } = useQuery(LIST_USERS_QUERY)
+  const {
+    loading,
+    error,
+    data = { users: [] },
+    refetch: refetchUsers
+  } = useQuery(LIST_USERS_QUERY)
 
   const [createUser] = useMutation(CREATE_USER_MUTATION)
 
@@ -30,36 +35,22 @@ export default function ListUsers () {
     refetchUsers()
   }
 
-  if (loading) {
-    return <div>
-      Loading...
+  return (
+    <div>
+      <h1>Users List</h1>
+      <ul>
+        {data.users.map((user, i) =>
+          <li key={i}>{user.name}</li>
+        )}
+      </ul>
+      <label>Create User<br />
+        <input
+          type='text'
+          onChange={e => setName(e.target.value)}
+          value={name}
+        /><br/>
+      </label>
+      <button onClick={createNewUser}>Save</button>
     </div>
-  }
-
-  if (error) {
-    return <div>
-      Error occured.
-    </div>
-  }
-
-  if (!loading && !error && data.users) {
-    return (
-      <div>
-        <h2>Users List</h2>
-        <ul>
-          {data.users.map((user, i) => <li key={i}>
-            {user.name}
-          </li>)}
-        </ul>
-        <label>Name:
-          <input
-            type='text'
-            onChange={e => setName(e.target.value)}
-            value={name}
-          />
-        </label>
-        <button onClick={createNewUser}>Save</button>
-      </div>
-    )
-  }
+  )
 }

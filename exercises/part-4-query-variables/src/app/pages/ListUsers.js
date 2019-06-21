@@ -20,7 +20,12 @@ export default function ListUsers () {
 
   const [name, setName] = useState('')
 
-  const { loading, data = { users: [] }, error, refetch: refetchUsers } = useQuery(LIST_USERS_QUERY)
+  const {
+    loading,
+    error,
+    data = { users: [] },
+    refetch: refetchUsers
+} = useQuery(LIST_USERS_QUERY)
 
   const [createUser] = useMutation(CREATE_USER_MUTATION)
 
