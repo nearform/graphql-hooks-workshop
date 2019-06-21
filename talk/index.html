@@ -42,7 +42,7 @@
     <span class="bubblegum">React Hooks</span> are...</em>
   </div>
   <div>
-    <span class="bubblegum">reusable stateful logic functions</span><span> that does not obstruct the view hierarchy</span>
+    <span class="bubblegum">reusable stateful logic functions</span><span> that do not obstruct the view hierarchy</span>
   </div>
   <div>
     <ul>
@@ -68,6 +68,16 @@
     Introducing <em>graphql-hooks!</em>
   </div>
   <div><em>graphql-hooks</em> is a tiny hooks-first and super-fast Graph<span class="bubblegum">QL</span> client</div>
+  <div><em>graphql-hooks</em>
+    <ul>
+      <li><code>github.com/nearform/graphql-hooks</code></li>
+      <li><code>www.npmjs.com/package/graphql-hooks</code></li>
+    </ul>
+  </div>
+  <div><em>graphql-hooks-workshop</em><br /><br />
+    <code>github.com/nearform/graphql-hooks-workshop</code>
+
+  </div>
   <div>
     <u><em>Setup</em></u>
     <ul>
@@ -113,10 +123,14 @@
     Look at <em><code>src/server/graphql.js</code></em>
     <ul>
       <li><span class="bubblegum">fastify-gql</span> module</li>
+      <li>data</li>
       <li>schema</li>
       <li>resolvers</li>
       <li><em><code>graphiql: <span class="bubblegum">true</span></code></em></li>
     </ul>
+  </div>
+  <div style="text-align: center;">
+    <img src="./bench.png" style="width: 50% !important;"></a>
   </div>
   <div><span class="bubblegum">graph</span><i>i</i><em>QL</em></div>
   <div>
@@ -155,10 +169,11 @@
       <li><span class="bubblegum">http://localhost:3000</span></li>
     </ul>
   </div>
-  <div><em>Modify existing file</em> <code class=javascript><pre>src/server/graphql.js</pre></code></div>
+  <div><em>Look at</em> <code class=javascript><pre>src/server/graphql.js</pre></code></div>
   <div>A Graph<span class="bubblegum">QL</span> schema defines the <em>relationships</em> and <em>structure</em> of the data
   </div>
-  <div>In the current <em>schema</em>, <span class="bubblegum">Query</span> is the <em>entry point</em>
+  <div>In the current <em>schema</em><br />
+    <span class="bubblegum">Query</span> is the <em>entry point</em><br />
     that provides the type <span class="bubblegum">User</span>
     <pre><code>
 const schema = `
@@ -174,8 +189,9 @@ const schema = `
   </div>
   <div>Graph<span class="bubblegum">QL</span> <em>resolvers</em> are functions that define what to do with the data
   </div>
-  <div>In the current <em>resolver</em>,
-    <span class="bubblegum">Query</span> defines what to do with the <em>schema</em>, in this case, it simply fetches all of the <span class="bubblegum">users</span>
+  <div>In the current <em>resolver</em><br />
+    <span class="bubblegum">Query</span> defines what to do with the <em>schema</em><br />
+    in this case, to fetch all of the <span class="bubblegum">users</span>
     </ul>
     <pre><code>
 const resolvers = {
@@ -197,6 +213,7 @@ const resolvers = {
     add a <span class="bubblegum">mutation</span> to the <em>schema</em> and <em>resolvers</em> in <code>graphql.js</code>
   </div>
   <div>
+    <em>Modify <u><code class=javascript>src/server/graphql.js</code></u></em>
     <pre><code>
 const schema = `
   type User {
@@ -214,6 +231,7 @@ const schema = `
 </code></pre>
   </div>
   <div>
+    <em>Modify <u><code class=javascript>src/server/graphql.js</code></u></em>
     <pre><code>
 const resolvers = {
   Query: {
@@ -230,12 +248,14 @@ const resolvers = {
 }
 </code></pre>
   </div>
-  <div>Try the <em>Create a User</em> mutation in <span class="bubblegum">graph</span><i>i</i><em>QL</em>
+  <div>Test the new <em>Create a User</em> mutation<br /><br />
+    <u><span class="bubblegum">Graph</span><i>i</i><em>QL</em></u><br /><br />
     <span class="bubblegum">
       http://localhost:3000/graphiql.html
     </span>
   </div>
-  <div><pre><code>
+  <div><em>RUN THIS QUERY</em>
+    <pre><code>
 mutation CreateUser($name: String!){
   createUser(name: $name) {
     name
@@ -243,22 +263,48 @@ mutation CreateUser($name: String!){
 }
   </code></pre>
   </div>
-  <div>Don't forget to add Query Variables<pre><code>
+  <div>Don't forget to add <em>Query Variables</em>
+    <pre><code>
 {
   "name": "bob"
 }
   </code></pre>
   </div>
+  <div>
+    <em>Test it</em>
+    <pre><code>
+{
+  users {
+    name
+  }
+}
+    </code></pre>
+  </div>
   <div><em>Part 3:</em> graphql-hooks</div>
   <div>
     <em><u>Goals</u></em>
     <ul>
-      <li>Let's see graphql-hooks in action</li>
+      <li>See <span class="bubblegum">graphql-hooks</span> in action</li>
+      <li>Connect the back-end data to the front-end webpage</li>
+      <li>Retrieve a list of <em>users</em> from an API using a <span class="bubblegum">graphql hook</span></li>
     </ul>
   </div>
   <div>
-    <em>Step 1</em>
-    <div>Let's create a GraphQL client</div>
+    <em><u>graphql-hooks setup</u></em>
+    <ul>
+      <li><code>cd graphql-hooks-workshop/exercises/part-3-graphql-hooks/</code></li>
+      <li><code>npm install</code></li>
+      <li><code>npm run watch</code></li>
+    </ul>
+  </div>
+  <div>
+    <em>Install graphql-hooks</em>
+    <br /><br />
+    <code><pre>npm install graphql-hooks</pre></code>
+  </div>
+  <div>
+    <em>Modify src/client/js/app-shell.js</em><br /><br />
+    <div>Create a Graph<span class="bubblegum">QL</span> client</div>
     <pre><code class=javascript>
 import { GraphQLClient } from 'graphql-hooks'
 
@@ -268,42 +314,64 @@ const client = new GraphQLClient({
     </code></pre>
   </div>
   <div>
-    <em>Step 2</em>
-    <div>Wrap the app with provider</div>
+    <em>Wrap the app with provider</em>
+    <br /><br />
     <pre><code class=javascript>
 import {
   GraphQLClient,
   ClientContext
 } from 'graphql-hooks'
 
-const client = ...
+const client = new GraphQLClient({
+  url: '/graphql',
+})
 
-function App() {
-  return (
-    &lt;ClientContext.Provider value={client}>
-      {/* children */}
-    &lt;/ClientContext.Provider>
-  )
-}
+const App = (
+  &lt;ClientContext.Provider value={client}>
+    &lt;AppShell />
+  &lt;/ClientContext.Provider>
+)
     </code></pre>
   </div>
   <div>
-    <em>Step 3</em>
+    <em>Modify <code>src/app/pages/ListUsers.js</code></em><br /><br />
     <div>Query GraphQL</div>
     <pre><code class=javascript>
-import { useQuery } from 'graphql-hooks'
-const QUERY = `query ListUsersQuery {
-  users {
-    name
-  }
-}`
+import { useQuery, useMutation } from 'graphql-hooks'
 
-const { loading, error, data } = useQuery(QUERY)
+const LIST_USERS_QUERY = `
+  query ListUsersQuery {
+    users {
+      name
+    }
+  }
+`
+const CREATE_USER_MUTATION = `
+  mutation CreateUser($name: String!) {
+    createUser(name: $name) {
+      name
+    }
+  }
+`
+    </code></pre>
+  </div>
+  <div>
+    <em>Modify <code>src/app/pages/ListUsers.js</code></em><br /><br />
+    <div>Add the hooks</div>
+    <pre><code class=javascript>
+const {
+  loading,
+  error,
+  data = { users: [] },
+  refetch: refetchUsers
+} = useQuery(LIST_USERS_QUERY)
+
+const [createUser] = useMutation(CREATE_USER_MUTATION)
     </code></pre>
   </div>
   <div>
     <em>Hook details</em>
-    <pre><code class=javascript>
+    <code class=javascript><pre>
 const {
   loading,        // Boolean, is it completed?
   error,          // Boolean, was it successful?
@@ -318,25 +386,71 @@ const {
   useCache,       // Boolean, OK to lookup the cache first?
   skipCache       // Boolean, tore the response in cache?
 })
+    </pre></code>
+  </div>
+  <div>
+    <em>Modify <code>src/app/pages/ListUsers.js</code></em><br /><br />
+    <div>Update createNewUser function</div>
+    <pre><code class=javascript>
+async function createNewUser() {
+  await createUser({ variables: { name } })
+  setName('')
+  refetchUsers()
+}
+</code></pre>
+    <div>Can delete the old <em>users</em> data</div>
+  </div>
+  <div><em>Part 4:</em> Query Variables</div>
+  <div>
+    <em><u>Goal</u></em>
+    <div>Implement page-based <em>pagination</em></div>
+  </div>
+  <div>
+    <div><em>Step 1</em></div>
+    <div>Prepare backend resolver</div>
+    <pre><code class=javascript>
+const resolvers = {
+  Query: {
+    users: (_, { skip = 0, limit }) => {
+      const end = limit
+        ? skip + limit
+        : undefined
+      return users.slice(skip, end)
+    }
+  }
+}
     </code></pre>
   </div>
-  <div>Next <span class="bubblegum">an exercise</span></div>
   <div>
-      <em>Goal</em>
-      <div>Let's retrieve list of users from API using Graphql hook</div>
-    </div>
-  <div>
-    <u><em>graphql-hooks</em></u>
-    <ul>
-      <li><code>cd graphql-hooks-workshop/exercises/part-3-hooks/</code></li>
-      <li><code>npm install</code></li>
-      <li><code>npm run watch</code></li>
-    </ul>
+    <div><em>Step 2</em></div>
+    <div>Tune the query</div>
+    <pre><code class=javascript>
+const USERS_QUERY = `
+  query UsersQuery($skip: Int, $limit: Int) {
+    users(skip: $skip, limit: $limit) {
+      name
+    }
+  }
+`
+    </code></pre>
   </div>
   <div>
-    <div>Coding...</div>
+    <div><em>Step 3</em></div>
+    <div>Execute the query</div>
+    <pre><code class=javascript>
+const { data } = <em>useQuery</em>(USERS_QUERY, {
+  variables: {
+    limit: 1,
+    skip: page - 1
+  }
+})
+    </code></pre>
   </div>
-  <div><em>Part 4:</em> Caching</div>
+  <div>
+    <div><span class="bubblegum">An exercise</span></div>
+    <div>Let's implement pagination for users page</div>
+  </div>
+  <div><em>Part 5:</em> Caching</div>
   <div>
     <em><u>Goal</u></em>
     <div>Do not repeat the identical requests</div>
@@ -385,7 +499,7 @@ const client = new GraphQLClient({
   <div>
     If we make a manual <span class="bubblegum">query</span> and then unmount and mount the 'ListUsers' component, we can test that the <em>cache</em> is working
   </div>
-  <div><em>Part 5:</em> <span class="bubblegum">S</span>erver <span class="bubblegum">S</span>ide <span class="bubblegum">R</span>endering</div>
+  <div><em>Part 6:</em> <span class="bubblegum">S</span>erver <span class="bubblegum">S</span>ide <span class="bubblegum">R</span>endering</div>
   <div>
     <em><u>Goal</u></em>
     <div>Speed up React app delivery</div>
@@ -478,57 +592,6 @@ const client = new GraphQLClient({
     <div><span class="bubblegum">An exercise</span></div>
     <div>Use SSR on ListUsers page</div>
   </div>
-  <div><em>Part 6:</em> Query Variables</div>
-  <div>
-    <em><u>Goal</u></em>
-    <div>Let's implement page-based <em>pagination</em></div>
-  </div>
-  <div>
-    <div><em>Step 1</em></div>
-    <div>Prepare backend resolver</div>
-    <pre><code class=javascript>
-const resolvers = {
-  Query: {
-    users: (_, { skip = 0, limit }) => {
-      const end = limit
-        ? skip + limit
-        : undefined
-      return users.slice(skip, end)
-    }
-  }
-}
-    </code></pre>
-  </div>
-  <div>
-    <div><em>Step 2</em></div>
-    <div>Tune the query</div>
-    <pre><code class=javascript>
-const USERS_QUERY = `
-  query UsersQuery($skip: Int, $limit: Int) {
-    users(skip: $skip, limit: $limit) {
-      name
-    }
-  }
-`
-    </code></pre>
-  </div> 
-  <div>
-    <div><em>Step 3</em></div>
-    <div>Execute the query</div>
-    <pre><code class=javascript>
-const { data } = <em>useQuery</em>(USERS_QUERY, {
-  variables: {
-    limit: 1,
-    skip: page - 1
-  }
-})
-    </code></pre>
-  </div>
-  <div>
-    <div><span class="bubblegum">An exercise</span></div>
-    <div>Let's implement pagination for users page</div>
-  </div>
-  <div>Any <span class="bubblegum">issues?</span></div>
   <div>
     <em>graphql-hooks</em> are <span class="bubblegum">awesome!</span>
   </div>
