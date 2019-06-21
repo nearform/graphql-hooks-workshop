@@ -21,7 +21,7 @@ const schema = `
   }
 
   type Query {
-    users(skip: Int, limit: Int): [User]
+    users: [User]
   }
 `
 

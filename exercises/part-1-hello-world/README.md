@@ -8,7 +8,7 @@
   - React
   - GraphQL
 - Hello World Setup
-  - change directory to `part-1-hello-world`
+  - change directory to `exercises/part-1-hello-world`
   - `npm install`
   - `npm run watch`
   - http://localhost:3000
@@ -18,6 +18,7 @@
   - It is not connected to GraphQL... yet
 - Look at `src/server/graphql.js`
   - fastify-gql module
+  - data
   - schema
   - resolvers
   - `graphiql: true`

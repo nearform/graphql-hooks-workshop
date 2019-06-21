@@ -2,29 +2,118 @@
 
 ## Introduction
 
-- What is graphQL
-- Back story
-- Ask if anyone has used Apollo / Relay
-
-## [Part 1 - hello world (graphql/fastify/react)](https://github.com/nearform/graphql-hooks-workshop/tree/master/part-1-hello-world)
-
-- Set up a GraphQL server
-  - clone repo
+- React Hooks
+- GraphQL
+- Setup
+  - Node v10.16.0
+  - clone github repository
   `git clone git@github.com:nearform/graphql-hooks-workshop.git`
-  - change directory to `part-1-hello-world`
-- `npm install`
-- `npm run watch`
-- View site in browser: http://localhost:3000
-- Fix installation issues
-- View GraphiQL interface http://localhost:3000/graphiql.html
 
-## [Part 2 - graphQL skeleton for connecting with `graphql-hooks`](https://github.com/nearform/graphql-hooks-workshop/tree/master/part-2-skeleton)
+## [Part 1 - hello world](https://github.com/nearform/graphql-hooks-workshop/tree/master/exercises/part-1-hello-world)
 
-- Display a list of 'users'
-- Create a new 'user'
-- Create a new file: `src/app/pages/ListUsers.js`
+- Goals
+  - Get a GraphQL Server up and running
+  - Explore GraphiQL
+- Stack
+  - Node.js
+  - Fastify
+  - React
+  - GraphQL
+- Hello World Setup
+  - cd exercises/part-1-hello-world
+  - `npm install`
+  - `npm run watch`
+  - http://localhost:3000
+- In the browser
+  - Navigate to the 'List Users' Page
+  - This is just a Skeleton
+  - It is not connected to GraphQL... yet
+- Look at `src/server/graphql.js`
+  - fastify-gql module
+  - data
+  - schema
+  - resolvers
+  - `graphiql: true`
+- GraphiQL
+  - an in-browser IDE for exploring GraphQL
+  - http://localhost:3000/graphiql.html
+  - Run this Query
+    ```
+      {
+        users {
+          name
+        }
+      }
+    ```
 
-## [Part 3 - graphQL-hooks](https://github.com/nearform/graphql-hooks-workshop/tree/master/part-3-hooks)
+## [Part 2 - GraphQL Schema](https://github.com/nearform/graphql-hooks-workshop/tree/master/exercises/part-2-skeleton)
+
+- Goals
+  - Update the GraphQL schema to Create a User
+  - Test it with GraphiQL
+- GraphQL Schema Setup
+  - change directory to `exercises/part-2-schema`
+  - `npm install`
+  - `npm run watch`
+  - http://localhost:3000
+- Modify schema in `src/server/graphql.js`
+  ```
+  const schema = `
+    type User {
+      name: String
+    }
+
+    type Query {
+      users: [User]
+    }
+
+    type Mutation {
+      createUser(name: String!): User
+    }
+  `
+ ```
+ - Modify resolvers in `src/server/graphql.js`
+   ```
+     const resolvers = {
+       Query: {
+         users() {
+           return users
+         }
+       },
+       Mutation: {
+         createUser: (_, user) => {
+           users.push(user)
+           return user
+         }
+       }
+     }
+  ```
+  - Test it in GraphiQL
+    - http://localhost:3000/graphiql.html
+    - Try this query
+      ```
+      mutation CreateUser($name: String!){
+        createUser(name: $name) {
+          name
+        }
+      }
+      ```
+    - With these Query variables
+    ```
+    {
+      "name": "bob"
+    }
+    ```
+  - Test it!
+    ```
+      {
+        users {
+          name
+        }
+      }
+    ```
+
+## [Part 3 - graphql-hooks](https://github.com/nearform/graphql-hooks-workshop/tree/master/exercises/part-3-graphql-hooks)
 
 - Describe what GraphQL-hooks does
 - `npm install graphql-hooks --save`
