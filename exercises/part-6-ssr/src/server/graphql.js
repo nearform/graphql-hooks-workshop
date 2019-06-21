@@ -1,21 +1,6 @@
 const fastifyGQL = require('fastify-gql')
 
-const schema = `
-  type User {
-    name: String
-  }
-
-  type Query {
-    users(skip: Int, limit: Int): [User]
-    firstUser: User
-    hello(name: String): String
-  }
-
-  type Mutation {
-    createUser(name: String!): User
-  }`
-
-const users = [
+const userList = [
   {
     name: 'Brian'
   },
@@ -30,15 +15,31 @@ const users = [
   }
 ]
 
+const schema = `
+  type User {
+    name: String
+  }
+
+  type Query {
+    users(skip: Int, limit: Int): [User]
+  }
+
+  type Mutation {
+    createUser(name: String!): User
+  }
+`
+
 const resolvers = {
   Query: {
-    users() {
-      return users
+    users (_, { skip = 0, limit }) {
+      return limit ?
+        userList.slice(skip, skip + limit) :
+        userList.slice(skip)
     }
   },
   Mutation: {
     createUser(_, user) {
-      users.push(user)
+      userList.push(user)
       return user
     }
   }

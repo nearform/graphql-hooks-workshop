@@ -1,4 +1,4 @@
-# Part 1 - hello world
+# Part 1 - Hello World
 - Goals
   - Get a GraphQL Server up and running
   - Explore GraphiQL

@@ -43,55 +43,129 @@
       }
     ```
 
-## [Part 2 - GraphQL Schema for connecting with `graphql-hooks`](https://github.com/nearform/graphql-hooks-workshop/tree/master/exercises/part-2-schema)
+## [Part 2 - GraphQL Schema](https://github.com/nearform/graphql-hooks-workshop/tree/master/exercises/part-2-schema)
 
-- Describe what we’re trying to build
-- List of ‘post’ and a form that creates a new one
-- create dummy data ?
+- Goals
+  - Update the GraphQL schema to Create a User
+  - Test it with GraphiQL
+- GraphQL Schema Setup
+  - change directory to `exercises/part-2-schema`
+  - `npm install`
+  - `npm run watch`
+  - http://localhost:3000
+- Modify schema in `src/server/graphql.js`
+  ```
+  const schema = `
+    type User {
+      name: String
+    }
 
-## [Part 3 - graphQL-hooks](https://github.com/nearform/graphql-hooks-workshop/tree/master/exercises/part-3-hooks)
+    type Query {
+      users: [User]
+    }
 
-- Describe what GraphQL-hooks does
-- npm i graphql-hooks
-- Update the front-end to use ClientProvider
-- Write a test component that uses useQuery
-- Verify everything is working
-- Now C&P the code the renders the list of stories - minus the graphql-hooks logic
-- useQuery for the list
-- useMutation for the form -> move to a later step...
-- Verify that both work / fix people issues
+    type Mutation {
+      createUser(name: String!): User
+    }
+  `
+ ```
+- Modify resolvers in `src/server/graphql.js`
+   ```
+    const resolvers = {
+      Query: {
+        users() {
+          return userList
+        }
+      },
+      Mutation: {
+        createUser(_, user) {
+          userList.push(user)
+          return user
+        }
+      }
+    }
+  ```
+- Test it in GraphiQL
+  - http://localhost:3000/graphiql.html
+  - Try this query
+    ```
+    mutation CreateUser($name: String!){
+      createUser(name: $name) {
+        name
+      }
+    }
+    ```
+  - With these Query variables
+  ```
+  {
+    "name": "bob"
+  }
+  ```
+- Test it - Fetch all users
+  ```
+    {
+      users {
+        name
+      }
+    }
+  ```
 
-## [Part 4 - graphQL-hooks-memcache](https://github.com/nearform/graphql-hooks-workshop/tree/master/exercises/part-4-caching)
+## [Part 3 - graphqlL-hooks](https://github.com/nearform/graphql-hooks-workshop/tree/master/exercises/part-3-hooks)
 
-- Caching
-- `npm i graphql-hooks-memcache`
+- Goals
+  - See graphql-hooks in action
+  - Connect the back-end data to the front-end webpage
+  - Retrieve a list of users from an API using a graphql hook
+- graphql-hooks Setup
+  - change directory to `exercises/part-3-graphql-hooks`
+  - `npm install`
+  - `npm run watch`
+  - http://localhost:3000
+- Install `graphql-hooks`
+  `npm install graphql-hooks`
+
+## [Part 4 - Query Variables](https://github.com/nearform/graphql-hooks-workshop/tree/master/exercises/part-4-query-variables)
+
+- Goal
+  - Implement Pagination
+- graphql-hooks Setup
+  - change directory to `exercises/part-4-query-variables`
+  - `npm install`
+  - `npm run watch`
+  - http://localhost:3000
+
+
+## [Part 5 - graphQL-hooks-caching](https://github.com/nearform/graphql-hooks-workshop/tree/master/exercises/part-4-caching)
+
+- Goal
+  - Avoid repeating identical requests
+- Caching Setup
+  - change directory to `exercises/part-4-caching`
+  - `npm install`
+  - `npm run watch`
+  - http://localhost:3000
+- `npm install graphql-hooks-memcache`
 - Update the client provider
-- Describe the caching implementation is document based, we create a hash of the operation and it’s options
+- The caching implementation is document based
+- Create a hash of the operation and its options
 - Store it in a simple k/v store
-- Demonstrate the caching works
 
-## [Part 5 - graphQL-hooks-ssr](https://github.com/nearform/graphql-hooks-workshop/tree/master/exercises/part-5-ssr)
+## [Part 6 - graphQL-hooks-ssr](https://github.com/nearform/graphql-hooks-workshop/tree/master/exercises/part-5-ssr)
 
-- SSR
-- Npm i graphql-hooks-ssr
-- Describe it’s implementation a little
-- Finds all the useQuery’s and resolves them, re-renders and verify all queries have been resolved
-- Populates the cache with all the queries
-- Serialises the cache in the html payload to the app
-- App code then parses the JSON and passes it to memcache as its initial value
-- Update the code & demonstrate it works
+- SSR - Server Side Rendering
+- SSR Setup
+  - change directory to `exercises/part-5-ssr`
+  - `npm install`
+  - `npm run watch`
+  - http://localhost:3000
+- `npm install graphql-hooks-ssr`
+- `npm install isomorphic-unfetch`
+- Implementation
+  - Finds all the `useQuery`s and resolves them
+  - Re-renders and verifies all queries have been resolved
+  - Populates the cache with all of the queries
+  - Serialises the cache in the html payload to the app
+  - Parses the JSON and passes it to memcache as its initial value
+  - Hydrate instead of Render
 
-
-## [Part 6 - graphQL pagination](https://github.com/nearform/graphql-hooks-workshop/tree/master/exercises/part-6-pagination)
-
-- Pagination
-- 2 types, page based or infinite scrolling
-- Demonstrate both
-
-## Finale
-
-- Next.js example
-- If we have time, do the rewrite live
-- Else clone `with-graphql-hooks` example
-- Compare the code
-- Compare the bundle sizes
+## [Part 7 - Completed](https://github.com/nearform/graphql-hooks-workshop/tree/master/exercises/part-7-completed)

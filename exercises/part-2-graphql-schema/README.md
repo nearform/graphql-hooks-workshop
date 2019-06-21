@@ -1,4 +1,4 @@
-# Part 2 - GraphQL schema
+# Part 2 - GraphQL Schema
 
 - Goals
   - Update the GraphQL schema to Create a User
@@ -26,19 +26,19 @@
  ```
  - Modify resolvers in `src/server/graphql.js`
    ```
-     const resolvers = {
-       Query: {
-         users() {
-           return users
-         }
-       },
-       Mutation: {
-         createUser: (_, user) => {
-           users.push(user)
-           return user
-         }
-       }
-     }
+    const resolvers = {
+      Query: {
+        users() {
+          return userList
+        }
+      },
+      Mutation: {
+        createUser(_, user) {
+          userList.push(user)
+          return user
+        }
+      }
+    }
   ```
   - Test it in GraphiQL
     - http://localhost:3000/graphiql.html
@@ -56,7 +56,7 @@
       "name": "bob"
     }
     ```
-  - Test it!
+  - Test it - Fetch all users
     ```
       {
         users {

@@ -7,7 +7,7 @@ import AppShell from '../../app/AppShell'
 import { GraphQLClient, ClientContext } from 'graphql-hooks'
 
 const client = new GraphQLClient({
-  url: '/graphql',
+  url: '/graphql'
 })
 
 const App = (

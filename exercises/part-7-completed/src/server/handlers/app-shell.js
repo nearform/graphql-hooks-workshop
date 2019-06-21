@@ -44,9 +44,9 @@ async function appShellHandler(req, reply) {
   })
 
   const App = (
-      <ClientContext.Provider value={client}>
-        <AppShell />
-      </ClientContext.Provider>
+    <ClientContext.Provider value={client}>
+      <AppShell />
+    </ClientContext.Provider>
   )
 
   const initialState = await getInitialState({ App, client })

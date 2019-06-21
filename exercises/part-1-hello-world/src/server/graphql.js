@@ -1,6 +1,6 @@
 const fastifyGQL = require('fastify-gql')
 
-const users = [
+const userList = [
   {
     name: 'Brian'
   },
@@ -28,7 +28,7 @@ const schema = `
 const resolvers = {
   Query: {
     users() {
-      return users
+      return userList
     }
   }
 }
