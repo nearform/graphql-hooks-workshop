@@ -9,14 +9,14 @@ class AppShell extends React.Component {
   render() {
     return (
       <div className="app-shell-component">
-      <nav>
-        <Link to="/">Hello World</Link> |{" "}
-        <Link to="/listUsers">List Users</Link>
-      </nav>
-      <Router>
-        <HelloWorld path="/" />
-        <ListUsers path="/listUsers" />
-      </Router>
+        <nav>
+          <Link to="/">Hello World</Link> |{" "}
+          <Link to="/listUsers">List Users</Link>
+        </nav>
+        <Router>
+          <HelloWorld path="/" />
+          <ListUsers path="/listUsers" />
+        </Router>
       </div>
     )
   }

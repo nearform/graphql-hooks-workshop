@@ -21,7 +21,7 @@ const schema = `
   }
 
   type Query {
-    users: [User]
+    users(skip: Int, limit: Int): [User]
   }
 
   type Mutation {
@@ -30,12 +30,13 @@ const schema = `
 
 const resolvers = {
   Query: {
-    users() {
-      return users
+    users: (_, { skip = 0, limit = 5 }) => {
+      const end = limit ? skip + limit : undefined
+      return users.slice(skip, end)
     }
   },
   Mutation: {
-    createUser(_, user) {
+    createUser: (_, user) => {
       users.push(user)
       return user
     }

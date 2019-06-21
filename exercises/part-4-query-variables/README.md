@@ -1,66 +1,67 @@
-# Part 6 - graphql-hooks Pagination
+# Part 5 - graphQL-hooks-ssr
 
-- 2 types of Pagination
-  - page based
-  - infinite scrolling
-- Demonstrate both
+- SSR - Server Side Rendering
+- `npm install graphql-hooks-ssr --save`
+- Implementation
+  - Finds all the `useQuery`s and resolves them
+  - Re-renders and verifies all queries have been resolved
+  - Populates the cache with all of the queries
+  - Serialises the cache in the html payload to the app
+  - Parses the JSON and passes it to memcache as its initial value
+- Update the code and fix issues
+- Open source code to demonstrate it works
 
 ## Fill in
-- Create `src/app/pages/PaginationPage.js`
+
+- Install `graphql-hooks-ssr`
+  - `npm install graphql-hooks-ssr --save`
+- Install `isomorphic-unfetch`
+  - `npm install isomorphic-unfetch --save`
+
+- Modify `src/server/handlers/app-shell.js`
   ```js
-  import React, { useState } from 'react'
-  import { useQuery } from 'graphql-hooks'
+  const { getInitialState } = require('graphql-hooks-ssr')
 
-  const USERS_QUERY = `
-    query UsersQuery($skip: Int, $limit: Int) {
-      users(skip: $skip, limit: $limit) {
-        name
-      }
-    }
-  `
+  <...>
 
-  export default function PaginationPage() {
+  const client = new GraphQLClient({
+    url: 'http://127.0.0.1:3000/graphql',
+    cache: memCache(),
+    fetch: require('isomorphic-unfetch'),
+    logErrors: true
+  })
 
-    const [page, setPage] = useState(1)
+  const App = (
+    <ClientContext.Provider value={client}>
+      <AppShell />
+    </ClientContext.Provider>
+  )
 
-    const { data } = useQuery(USERS_QUERY, {
-      variables: {
-        limit: 1,
-        skip: page - 1
-      }
-    })
+  const initialState = await getInitialState({ App, client })
+  const content = ReactDOMServer.renderToString(App)
+  const scripts = await renderScripts({ initialState })
 
-    return (
-      <div>
-        <h2>Pagination</h2>
-        <ul>
-          {data &&
-            data.users &&
-            data.users.map((user, i) =>
-              <li key={i}>{user.name}</li>
-            )}
-        </ul>
-        <button onClick={() => setPage(page - 1)}>Prev</button>
-        <button onClick={() => setPage(page + 1)}>Next</button>
-      </div>
-    )
+  <...>
+
+  async function renderScripts({ initialState }) {
+    const appShellBundlePath = await getBundlePath('app-shell.js')
+    return `
+      <script type="text/javascript">
+        window.__INITIAL_STATE__=${JSON.stringify(initialState).replace(
+          /</g,
+          '\\u003c'
+        )};
+      </script>
+      <script src="${appShellBundlePath}"></script>
+    `
   }
   ```
 
-- Modify `src/app/AppShell.js`
+- Modify `src/client/js/app-shell.js` (replace 'render' with 'hydrate')
   ```js
-  import PaginationPage from './pages/PaginationPage'
+  import { hydrate } from 'react-dom'
 
   <...>
 
-  <Link to="/users">PaginationPage</Link>
-
-  <...>
-
-  <PaginationPage path="/users" />
-  ```
-
-- Modify `src/server/index.js`
-  ```js
-  app.get('/users', appShellHandler)
+  hydrate(App, document.getElementById('app-root'))
   ```

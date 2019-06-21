@@ -20,7 +20,12 @@ export default function ListUsers () {
 
   const [name, setName] = useState('')
 
-  const { loading, data = { users: [] }, error, refetch: refetchUsers } = useQuery(LIST_USERS_QUERY)
+  const {
+    loading,
+    error,
+    data = { users: [] },
+    refetch: refetchUsers
+} = useQuery(LIST_USERS_QUERY)
 
   const [createUser] = useMutation(CREATE_USER_MUTATION)
 
@@ -32,11 +37,11 @@ export default function ListUsers () {
 
   return (
     <div>
-      <h2>Users List</h2>
+      <h1>Users List</h1>
       <ul>
-        {data.users.map((user, i) => <li key={i}>
-          {user.name}
-        </li>)}
+        {data.users.map((user, i) =>
+          <li key={i}>{user.name}</li>
+        )}
       </ul>
       <label>Create User<br />
         <input
