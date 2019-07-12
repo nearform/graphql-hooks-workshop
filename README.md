@@ -56,22 +56,7 @@
   - `npm install`
   - `npm run watch`
   - http://localhost:3000
-- Modify schema in `src/server/graphql.js`
-  ```
-  const schema = `
-    type User {
-      name: String
-    }
 
-    type Query {
-      users: [User]
-    }
-
-    type Mutation {
-      createUser(name: String!): User
-    }
-  `
- ```
 - Modify resolvers in `src/server/graphql.js`
    ```
      const resolvers = {
