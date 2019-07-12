@@ -72,7 +72,7 @@
     }
   `
  ```
- - Modify resolvers in `src/server/graphql.js`
+- Modify resolvers in `src/server/graphql.js`
    ```
      const resolvers = {
        Query: {
