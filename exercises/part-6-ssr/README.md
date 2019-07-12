@@ -2,7 +2,7 @@
 
 - SSR - Server Side Rendering
 - SSR Setup
-  - change directory to `exercises/part-5-ssr`
+  - change directory to `exercises/part-6-ssr`
   - `npm install`
   - `npm run watch`
   - http://localhost:3000
