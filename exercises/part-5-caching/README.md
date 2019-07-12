@@ -3,7 +3,7 @@
 - Goal
   - Avoid repeating identical requests
 - Caching Setup
-  - change directory to `exercises/part-4-caching`
+  - change directory to `exercises/part-5-caching`
   - `npm install`
   - `npm run watch`
   - http://localhost:3000
