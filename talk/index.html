@@ -74,8 +74,8 @@ function Hello ({name}) {
   <div>
     <ul>
       <li>Store and manage local state</li>
-      <li>Better separation of concerns</li>
-      <li>Stateful functional component approach (improve explanation)</li>
+      <li>Separation of concerns</li>
+      <li>Functions vs Classes</li>
     </ul>
   </div>
   <div>
@@ -83,11 +83,13 @@ function Hello ({name}) {
   </div>
   <div>
     <ul>
-      <li>something about schemas here
-      <li>Strongly typed query language that is self-documenting</li>
-      <li>Declarative language expressing data requirements</li>
-      <li>Single endpoint to do all the things</li>
-      <li>Fewer roundtrips / Smaller Payloads</li>
+      <li>Schema-based</li>
+      <li>Strongly type</li>
+      <li>Self-documenting</li>
+      <li>Declarative</li>
+      <li>Single endpoint</li>
+      <li>Fewer roundtrips</li>
+      <li>Smaller Payloads</li>
     </ul>
   </div>
   <div>
@@ -96,9 +98,8 @@ function Hello ({name}) {
   <div><em>graphql-hooks</em> is a light-weight hooks-first Graph<span class="bubblegum">QL</span> client</div>
   <div>
     <ul>
-      <li><code>github.com/nearform/graphql-hooks-workshop</code></li>
-      <li><code>npm.im/graphql-hooks</code></li>
-      <li><code>github.com/nearform/graphql-hooks</code></li>
+      <li><code>Workshop: github.com/nearform/graphql-hooks-workshop</code></li>
+      <li><code>Library: github.com/nearform/graphql-hooks</code></li>
     </ul>
   </div>
 
@@ -383,25 +384,6 @@ const {
     </ul>
   </div>
   <div>
-    <em>Hook details</em>
-    <code class=javascript><pre>
-const {
-  loading,        // Boolean, is it completed?
-  error,          // Boolean, was it successful?
-  data,           // JSON received from API
-  refetch,        // Function to trigger refetch
-  cacheHit,       // Data from the cache?
-  fetchError,
-  httpError,
-  graphQLErrors   // Errors
-} = <em>useQuery</em>(<em>QUERY</em>, {
-  variables: {},  // Does the query include variables?
-  useCache,       // Boolean, OK to lookup the cache first?
-  skipCache       // Boolean, tore the response in cache?
-})
-    </pre></code>
-  </div>
-  <div>
     <em>Modify <code>src/app/pages/ListUsers.js</code></em><br /><br />
     <div>Add the hook: useMutation</div>
     <pre><code class=javascript>
@@ -423,9 +405,8 @@ async function createNewUser() {
     <notes>Can delete the old users data</notes>
   </div>
   <div>
-    <em><u>Hooks</u></em>
-    <div><code class=javascript>setName('')</code><br />&nbsp;&nbsp;&nbsp;&nbsp;is a <span class="bubblegum">React-Hook</span></div>
-    <div><code class=javascript>refetchUsers()</code><br />&nbsp;&nbsp;&nbsp;&nbsp;is a <span class="bubblegum">GraphQL-Hook</span></div>
+    <div><code class=javascript>setName('')</code><br />&nbsp;&nbsp;&nbsp;&nbsp;is a <span class="bubblegum">React</span> <br>"setState" function</div>
+    <div><code class=javascript>refetchUsers()</code><br />&nbsp;&nbsp;&nbsp;&nbsp;is a <span class="bubblegum">GraphQL</span> <br>action-taking function</div>
   </div>
   <div><em>Part 4:</em> Query Variables</div>
   <div>
@@ -600,8 +581,7 @@ const client = new GraphQLClient({
     </code></pre>
   </div>
   <div>
-    Let's <em>prove</em> it<br /><br />
-    <code>chrome://inspect</code>
+    How would we <em>prove</em> it?
   </div>
   <div><em>Part 6:</em> <span class="bubblegum">S</span>erver <span class="bubblegum">S</span>ide <span class="bubblegum">R</span>endering</div>
   <div>
@@ -753,11 +733,12 @@ hydrate(App, document.getElementById('app-root'))
       Thanks
     </div>
     <div style="font-size: 0.2em">
+      <em>@</em>bmullen91,
       <em>@</em>edvinasbartkus,
       <em>@</em>kristingalvin,
-      <em>@</em>bmullen91,
-      <em>@</em>dave,
-      <em>@</em>matteo,
+      <em>@</em>davidmarkclem,
+      <em>@</em>matteocollina,
+      <em>@</em>wellboy
     </div>
   </div>
   <div>
