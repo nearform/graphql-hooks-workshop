@@ -122,17 +122,23 @@
 - import `useMutation` for the form
 - Verify that both work and fix any issues
 
-## [Part 4 - graphQL-hooks-memcache](https://github.com/nearform/graphql-hooks-workshop/tree/master/part-4-caching)
+## [Part 4 - Query Variables](https://github.com/nearform/graphql-hooks-workshop/tree/master/part-4-query-variables)
 
-- `npm install graphql-hooks-memcache --save`
-- `npm install @reach/router --save`
+- Update backend Schema
+- Update backend resolver
+- create src/app/pages/Pagination.page
+- Use `useQuery` with `skip` variable to select page
+- Add a `/users` path to the server to expose new functionality
+
+## [Part 5 - Caching](https://github.com/nearform/graphql-hooks-workshop/tree/master/part-5-caching)
+
+- `npm install graphql-hooks-memcache`
 - Update the client provider
 - The caching implementation is document based
 - Create a hash of the operation and its options
 - Store it in a simple k/v store
-- Demonstrate the caching works by clicking on the Test Link
 
-## [Part 5 - graphQL-hooks-ssr](https://github.com/nearform/graphql-hooks-workshop/tree/master/part-5-ssr)
+## [Part 6 - graphQL-hooks-ssr](https://github.com/nearform/graphql-hooks-workshop/tree/master/part-6-ssr)
 
 - SSR - Server Side Rendering
 - `npm install graphql-hooks-ssr --save`
@@ -144,19 +150,3 @@
   - Parses the JSON and passes it to memcache as its initial value
 - Update the code and fix issues
 - View source code to demonstrate it works
-
-
-## [Part 6 - graphQL pagination](https://github.com/nearform/graphql-hooks-workshop/tree/master/part-6-pagination)
-
-- 2 types of Pagination
-  - page based
-  - infinite scrolling
-- Demonstrate both
-
-## Finale
-
-- Next.js example
-- If we have time, do the rewrite live
-- Else clone `with-graphql-hooks` example
-- Compare the code
-- Compare the bundle sizes
