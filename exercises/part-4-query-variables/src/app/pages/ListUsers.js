@@ -16,6 +16,11 @@ const CREATE_USER_MUTATION = `
   }
 `
 
+// TODO
+// 1. Manage state that store what page the user is on
+// 2. Next and Prev buttons that mutate the state
+// 3. Pass in `limit` and `skip` to the `useQuery` variables
+
 export default function ListUsers () {
 
   const [name, setName] = useState('')
