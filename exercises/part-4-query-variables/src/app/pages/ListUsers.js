@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useQuery, useMutation } from 'graphql-hooks'
 
+// TODO
+// 1. Update query to pass $limit and $skip variables
 const LIST_USERS_QUERY = `
   query ListUsersQuery {
     users {
@@ -16,13 +18,20 @@ const CREATE_USER_MUTATION = `
   }
 `
 
-// TODO
+// TODO: Page based pagination
 // 1. Manage state that store what page the user is on
 // 2. Next and Prev buttons that mutate the state
 // 3. Pass in `limit` and `skip` to the `useQuery` variables
+// 4. Test it out !
+
+// TODO: Infinite loading
+// 1. Give the `updateData` function to the useQuery options
+// 2. It has the following signature: (prevData, newData) => data
+// 3. The updateData function should manipluate data.users
+// 4. data.user will append the new user to the prevData
+// 5. Test it out!
 
 export default function ListUsers () {
-
   const [name, setName] = useState('')
 
   const {

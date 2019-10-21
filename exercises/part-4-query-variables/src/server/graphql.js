@@ -16,7 +16,7 @@ const userList = [
 ]
 
 // TODO: Update the schema
-// 1. Add two parameters to users query limit and skip
+// 1. Add two parameters to users query limit and skip, both of type Int
 
 const schema = `
   type User {
