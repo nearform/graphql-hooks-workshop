@@ -27,6 +27,15 @@ export default function ListUsers () {
     variables: {
       limit: 1,
       skip: page - 1
+    },
+    updateData: (prevData, newData) => {
+      return {
+        ...newData,
+        users: [
+          ...prevData.users,
+          ...newData.users
+        ]
+      }
     }
   })
 
