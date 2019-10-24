@@ -18,23 +18,11 @@ const CREATE_USER_MUTATION = `
 
 export default function ListUsers () {
   const [name, setName] = useState('')
-  const [page, setPage] = useState(1)
 
   const {
     data = { users: [] },
     refetch: refetchUsers
-  } = useQuery(LIST_USERS_QUERY, {
-    variables: {
-      limit: 1,
-      skip: page - 1
-    },
-    updateData: (prevData, newData) => ({
-      users: [
-        ...prevData.users,
-        ...newData.users
-      ]
-    })
-  })
+  } = useQuery(LIST_USERS_QUERY)
 
   const [createUser] = useMutation(CREATE_USER_MUTATION)
 
@@ -52,8 +40,6 @@ export default function ListUsers () {
           {user.name}
         </li>)}
       </ul>
-      <button onClick={() => setPage(page > 1 ? page - 1 : 1)}>Prev</button>
-      <button onClick={() => setPage(page + 1)}>Next</button>
       <label>Create User<br />
         <input
           type='text'

@@ -26,6 +26,7 @@
     "fastify-static": "1.1.0",
     "graphql-hooks": "4.0.2",
     "graphql-hooks-memcache": "1.2.4",
+    "isomorphic-unfetch": "3.0.0",
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "react-tree-walker": "4.3.0"
