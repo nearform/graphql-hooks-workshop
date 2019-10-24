@@ -8,6 +8,12 @@ We can cache each graphql request to avoid repeating identical requests. Caching
 
 - Cache each graphql request using graphql-hooks-memcache
 
+### Prerequisites
+
+1. Install deps: `npm i`
+2. Install `graphql-hooks-memcache`
+3. Run the app: `npm run watch` -> `localhost:3000`
+
 ### Implementation
 
 1. Update `src/client/js/app-shell.js` import `graphql-hooks-memcache`

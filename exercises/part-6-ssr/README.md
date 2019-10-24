@@ -1,4 +1,17 @@
-# Part 6 - graphQL-hooks SSR
+# Part 6: graphQL-hooks-ssr
+
+### Goals
+
+- Ability to paginate between users
+- Ability to infinitly load users
+
+### Prerequisites
+
+1. Install deps: `npm i`
+2. Install `graphql-hooks-ssr`
+3. Run the app: `npm run watch` -> `localhost:3000`
+
+### Implementation Details
 
 - SSR - Server Side Rendering
 - SSR Setup

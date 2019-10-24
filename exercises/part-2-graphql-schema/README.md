@@ -1,66 +1,19 @@
-# Part 2 - GraphQL Schema
+# Part 2: GraphQL Schema
 
-- Goals
-  - Update the GraphQL schema to Create a User
-  - Test it with GraphiQL
-- GraphQL Schema Setup
-  - change directory to `exercises/part-2-schema`
-  - `npm install`
-  - `npm run watch`
-  - http://localhost:3000
-- Modify schema in `src/server/graphql.js`
-  ```
-  const schema = `
-    type User {
-      name: String
-    }
+### Goals
 
-    type Query {
-      users: [User]
-    }
+- Add a new mutation that allows us to create a new user
 
-    type Mutation {
-      createUser(name: String!): User
-    }
-  `
- ```
- - Modify resolvers in `src/server/graphql.js`
-   ```
-    const resolvers = {
-      Query: {
-        users() {
-          return userList
-        }
-      },
-      Mutation: {
-        createUser(_, user) {
-          userList.push(user)
-          return user
-        }
-      }
-    }
-  ```
-  - Test it in GraphiQL
-    - http://localhost:3000/graphiql.html
-    - Try this query
-      ```
-      mutation CreateUser($name: String!){
-        createUser(name: $name) {
-          name
-        }
-      }
-      ```
-    - With these Query variables
-    ```
-    {
-      "name": "bob"
-    }
-    ```
-  - Test it - Fetch all users
-    ```
-      {
-        users {
-          name
-        }
-      }
-    ```
+### Prerequisites
+
+1. Install deps: `npm i`
+2. Run the app: `npm run watch` -> `localhost:3000`
+
+### Implementation Details
+
+1. Add The Mutation type to the schema
+2. Add a `createUser` mutation
+3. Create user will take `name` parameter, which should be required
+4. The `createUser` mutation should return a User type.
+5. Add the Mutation resolver that implements the schema above
+6. `createUser` should mutate the userList variable, adding the new user to it

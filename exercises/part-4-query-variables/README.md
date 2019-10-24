@@ -3,7 +3,12 @@
 ### Goals
 
 - Ability to paginate between users
-- Ability to infinitly load users 
+- Ability to infinitly load users
+
+### Prerequisites
+
+1. Install deps: `npm i`
+2. Run the app: `npm run watch` -> `localhost:3000`
 
 ### Implementation Details
 
