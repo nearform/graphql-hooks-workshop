@@ -1,4 +1,5 @@
 import React from 'react'
+// TODO replace render with hydrate
 import { render } from 'react-dom'
 
 import AppShell from '../../app/AppShell'

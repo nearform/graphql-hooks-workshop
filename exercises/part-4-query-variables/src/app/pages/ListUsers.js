@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { useQuery, useMutation } from 'graphql-hooks'
 
 // TODO
-// 1. Update query to pass $limit and $skip variables
+// 1. C&P this into `src/app/pages/PaginationPage.js`
+// 2. Update query to pass $limit and $skip variables
 const LIST_USERS_QUERY = `
   query ListUsersQuery {
     users {
