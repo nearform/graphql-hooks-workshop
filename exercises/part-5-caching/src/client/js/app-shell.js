@@ -5,7 +5,6 @@ import AppShell from '../../app/AppShell'
 
 // graphql-hooks
 import { GraphQLClient, ClientContext } from 'graphql-hooks'
-import memCache from 'graphql-hooks-memcache'
 
 // TODO
 // 1. Import memCache from graphql-hooks (default export)

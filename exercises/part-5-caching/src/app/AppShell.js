@@ -4,6 +4,7 @@ import { Link, Router } from '@reach/router'
 // components
 import HelloWorld from './pages/HelloWorld'
 import ListUsers from './pages/ListUsers'
+import Pagination from './pages/Pagination'
 
 class AppShell extends React.Component {
   render() {
@@ -11,11 +12,13 @@ class AppShell extends React.Component {
       <div className="app-shell-component">
       <nav>
         <Link to="/">Hello World</Link> |{" "}
-        <Link to="/listUsers">List Users</Link>
+        <Link to="/listUsers">List Users</Link> |{" "}
+        <Link to="/pagination">Pagination</Link>
       </nav>
       <Router>
         <HelloWorld path="/" />
         <ListUsers path="/listUsers" />
+        <Pagination path="/pagination" />
       </Router>
       </div>
     )
