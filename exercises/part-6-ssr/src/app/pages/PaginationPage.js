@@ -10,7 +10,6 @@ const USERS_QUERY = `
 `
 
 export default function PaginationPage() {
-
   const [page, setPage] = useState(1)
 
   const { data } = useQuery(USERS_QUERY, {

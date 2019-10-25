@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { useQuery, useMutation } from 'graphql-hooks'
 
 const LIST_USERS_QUERY = `
-  query ListUsersQuery {
-    users {
+  query ListUsersQuery($limit: Int, $skip: Int) {
+    users(limit: $limit, skip: $skip) {
       name
     }
   }
@@ -17,7 +17,6 @@ const CREATE_USER_MUTATION = `
 `
 
 export default function ListUsers () {
-
   const [name, setName] = useState('')
 
   const {
@@ -51,5 +50,4 @@ export default function ListUsers () {
       <button onClick={createNewUser}>Save</button>
     </div>
   )
-
 }

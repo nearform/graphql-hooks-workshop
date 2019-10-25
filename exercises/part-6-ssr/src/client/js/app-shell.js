@@ -7,6 +7,10 @@ import AppShell from '../../app/AppShell'
 import { GraphQLClient, ClientContext } from 'graphql-hooks'
 import memCache from 'graphql-hooks-memcache'
 
+// TODO
+// 1. Grap the initialState from the window global we defined in the server
+// 2. Pass that to memCache(options) as option.initialState
+
 const client = new GraphQLClient({
   url: '/graphql',
   cache: memCache()
