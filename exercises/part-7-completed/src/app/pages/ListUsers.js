@@ -23,18 +23,7 @@ export default function ListUsers () {
   const {
     data = { users: [] },
     refetch: refetchUsers
-  } = useQuery(LIST_USERS_QUERY, {
-    variables: {
-      limit: 1,
-      skip: page - 1
-    },
-    updateData: (prevData, newData) => ({
-      users: [
-        ...prevData.users,
-        ...newData.users
-      ]
-    })
-  })
+  } = useQuery(LIST_USERS_QUERY)
 
   const [createUser] = useMutation(CREATE_USER_MUTATION)
 
