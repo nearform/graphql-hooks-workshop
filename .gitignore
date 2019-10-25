@@ -1,3 +1,6 @@
+exercises/part-1-hello-world/package-lock.json
+exercises/part-2-graphql-schema/package-lock.json
+exercises/part-3-graphql-hooks/package-lock.json
 exercises/part-4-query-variables/package-lock.json
 exercises/part-5-caching/package-lock.json
 exercises/part-6-ssr/package-lock.json
